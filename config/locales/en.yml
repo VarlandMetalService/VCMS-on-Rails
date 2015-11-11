@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      user:
+        one: Dude
+        other: Dudes
+      employee_note:
+        one: Employee Note
+        other: Employee Notes

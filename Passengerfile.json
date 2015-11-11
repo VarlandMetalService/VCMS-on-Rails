@@ -1,0 +1,5 @@
+{
+  "port": "3000",
+  "address": "192.168.82.77",
+  "environment": "production"
+}

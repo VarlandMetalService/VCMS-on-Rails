@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  note_on: 2015-11-09
+  note_type: MyString
+  ip_address: MyString
+  notes: MyText
+  follow_up: MyText
+  follow_up_on: 2015-11-09
+  external_key: MyString
+
+two:
+  note_on: 2015-11-09
+  note_type: MyString
+  ip_address: MyString
+  notes: MyText
+  follow_up: MyText
+  follow_up_on: 2015-11-09
+  external_key: MyString
