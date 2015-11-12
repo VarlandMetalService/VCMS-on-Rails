@@ -29,6 +29,7 @@ class EmployeeNote < ActiveRecord::Base
             format: { with: VALID_IP_REGEX }
   validates :notes,
             presence: true
+  validate :no_follow_up_date_without_text
   
   # Filtering.
   filterrific(
@@ -93,10 +94,20 @@ class EmployeeNote < ActiveRecord::Base
   end
   
   def formatted_notes
-    notes.gsub(/\r\n/, '<br />')
+    notes.gsub(/\r\n/, '<br />').html_safe
   end
   def formatted_follow_up
-    follow_up.gsub(/\r\n/, '<br />')
+    follow_up.gsub(/\r\n/, '<br />').html_safe
+  end
+  
+  # Don't allow follow up date without follow up text.
+  def no_follow_up_date_without_text
+    if follow_up_on && follow_up.blank?
+      errors.add(:follow_up_on, 'not allowed without explanation')
+    end
+    if follow_up && follow_up_on.blank?
+      errors.add(:follow_up, 'requires a follow up date')
+    end
   end
   
 end

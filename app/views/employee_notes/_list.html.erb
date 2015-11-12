@@ -8,9 +8,7 @@
         <th class="col-xs-1 text-center">Date</th>
         <th class="col-xs-1 text-center">By</th>
         <th class="col-xs-1 text-center">Type</th>
-        <th class="col-xs-3">Notes</th>
-        <th class="col-xs-3">Follow Up</th>
-        <th class="col-xs-1 text-center">Date</th>
+        <th class="col-xs-7">Notes</th>
         <th class="col-xs-1 text-center">Options</th>
       </tr>
     </thead>
@@ -21,9 +19,15 @@
           <td class="text-center"><%= n.note_on.strftime '%m/%d/%y' %></td>
           <td class="text-center"><%= n.author.initials %></td>
           <td class="text-center"><%= n.note_type %></td>
-          <td><%= n.formatted_notes.html_safe %></td>
-          <td><%= n.formatted_follow_up.html_safe unless n.follow_up.nil? %></td>
-          <td class="text-center"><%= n.follow_up_on.strftime '%m/%d/%y' unless n.follow_up_on.nil? %></td>
+          <td>
+            <%= n.formatted_notes %>
+            <% unless n.follow_up.blank? -%>
+              <br />
+              <br />
+              <small><strong class="text-uppercase">Follow Up<%= " on #{n.follow_up_on.strftime('%m/%d/%y')}" unless n.follow_up_on.nil? %>:</strong></small><br />
+              <%= n.formatted_follow_up %>
+            <% end %>
+          </td>
           <td class="text-center">
             <%= link_to 'Edit', edit_employee_note_path(n), class: 'btn btn-xs btn-default'  %>
             <%= link_to 'Delete', n, method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure you want to delete this note?' }  %>
