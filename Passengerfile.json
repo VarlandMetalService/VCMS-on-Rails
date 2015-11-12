@@ -1,0 +1,6 @@
+{
+  "port": 80,
+  "environment": "production",
+  "daemonize": true,
+  "user": "vcmsrails"
+}
