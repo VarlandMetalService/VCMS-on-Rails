@@ -45,13 +45,6 @@ class EmployeeNote < ActiveRecord::Base
   
   # Scopes.
   scope :sorted_by, ->(sort_option) {
-    #direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-    #case sort_option.to_s
-    #  when /^note_on/
-    #    order "employee_notes.note_on #{direction}"
-    #  else
-    #    order 'employee_notes.note_on desc'
-    #end
     order sort_option
   }
   scope :search_query, ->(query) {

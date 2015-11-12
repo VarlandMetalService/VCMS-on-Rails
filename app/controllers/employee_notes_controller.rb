@@ -5,21 +5,29 @@ class EmployeeNotesController < ApplicationController
   
   def index
   
-    @filterrific = initialize_filterrific(
-      EmployeeNote,
-      params[:filterrific],
-      select_options: {
-        sorted_by: EmployeeNote.options_for_sorted_by,
-        with_employee: User.options_for_select,
-        with_entered_by: EmployeeNote.options_for_entered_by,
-        with_note_type: EmployeeNote.options_for_type
-      }
-    ) or return
+    begin
+  
+      @filterrific = initialize_filterrific(
+        EmployeeNote,
+        params[:filterrific],
+        select_options: {
+          sorted_by: EmployeeNote.options_for_sorted_by,
+          with_employee: User.options_for_select,
+          with_entered_by: EmployeeNote.options_for_entered_by,
+          with_note_type: EmployeeNote.options_for_type
+        }
+      ) or return
+      
+      if @access_level.access_level == 3
+        @employee_notes = @filterrific.find.page(params[:page])
+      else
+        @employee_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
+      end
+      
+    rescue
     
-    if @access_level.access_level == 3
-      @employee_notes = @filterrific.find.page(params[:page])
-    else
-      @employee_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
+      redirect_to(reset_filterrific_url) and return
+    
     end
         
   end
