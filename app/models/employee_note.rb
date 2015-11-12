@@ -45,13 +45,14 @@ class EmployeeNote < ActiveRecord::Base
   
   # Scopes.
   scope :sorted_by, ->(sort_option) {
-    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
-    case sort_option.to_s
-      when /^note_on/
-        order "employee_notes.note_on #{direction}"
-      else
-        order 'employee_notes.note_on desc'
-    end
+    #direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    #case sort_option.to_s
+    #  when /^note_on/
+    #    order "employee_notes.note_on #{direction}"
+    #  else
+    #    order 'employee_notes.note_on desc'
+    #end
+    order sort_option
   }
   scope :search_query, ->(query) {
     where 'notes like ? or follow_up like ?', "%#{query}%", "%#{query}%"   
@@ -81,8 +82,8 @@ class EmployeeNote < ActiveRecord::Base
   # Select options for sorted by.
   def self.options_for_sorted_by
     [
-      ['Date (oldest first)', 'note_on_asc'],
-      ['Date (newest first)', 'note_on_desc']
+      ['Date (oldest first)', 'note_on'],
+      ['Date (newest first)', 'note_on DESC']
     ]
   end
   
