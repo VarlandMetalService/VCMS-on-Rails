@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many      :authored_employee_notes,
                 -> { order 'note_on DESC' },
                 class_name: 'EmployeeNote',
-                foreign_key: 'employee'
+                foreign_key: 'entered_by'
   has_many      :assigned_permissions
   has_many      :permissions,
                 -> { select('permissions.*, assigned_permissions.value AS access_level') },
