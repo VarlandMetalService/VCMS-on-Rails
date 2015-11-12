@@ -32,7 +32,7 @@ class EmployeeNote < ActiveRecord::Base
   
   # Filtering.
   filterrific(
-    default_filter_params: { sorted_by: 'note_on_desc' },
+    default_filter_params: { sorted_by: 'note_on DESC' },
     available_filters: [
       :sorted_by,
       :search_query,
