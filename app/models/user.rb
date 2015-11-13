@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   
   # Returns select options for employees.
   def self.options_for_select
-    order('employee_number').map { |u| [u.full_name, u.id] }
+    order('employee_number').map { |u| ["#{u.employee_number} - #{u.full_name}", u.id] }
   end
   
 end
