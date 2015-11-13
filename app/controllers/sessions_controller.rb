@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to root_path
     else
-      flash.now[:error] = 'Authentication failed. Please try again or contact IT for help.'
+      flash.now[:error] = 'Authentication failed. Please try again or contact IT for help. Make sure you are using your System i username and password, not your email username and password.'
       render 'new', :layout => false
     end
   end
