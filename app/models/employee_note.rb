@@ -39,7 +39,8 @@ class EmployeeNote < ActiveRecord::Base
       :with_employee,
       :with_note_type,
       :with_entered_by,
-      :with_date_gte
+      :with_date_gte,
+      :with_date_lte
     ]
   )
   
@@ -61,6 +62,9 @@ class EmployeeNote < ActiveRecord::Base
   }
   scope :with_date_gte, ->(value) {
     where 'note_on >= ?', value
+  }
+  scope :with_date_lte, ->(value) {
+    where 'note_on <= ?', value
   }
   
   # Select options for type.

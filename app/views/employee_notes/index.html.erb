@@ -42,7 +42,7 @@
             </div>
           </div>
           
-          <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="col-xs-12 col-sm-6 col-md-2">
             <div class="form-group">
               <%= f.label :with_employee, 'Employee:' %>
               <%= f.select :with_employee, @filterrific.select_options[:with_employee], { include_blank: true }, { class: 'form-control' } %>
@@ -50,7 +50,7 @@
           </div>
             
           <% if @access_level.access_level == 3 -%>  
-            <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-2">
               <div class="form-group">
                 <%= f.label :with_entered_by, 'Entered By:' %>
                 <%= f.select :with_entered_by, @filterrific.select_options[:with_entered_by], { include_blank: true }, { class: 'form-control' } %>
@@ -58,21 +58,28 @@
             </div>
           <% end %>
             
-          <div class="col-xs-12 col-sm-4 col-md-<%= (@access_level.access_level == 3) ? '2' : '3' %>">
+          <div class="col-xs-12 col-sm-4 col-md-2">
             <div class="form-group">
               <%= f.label :with_date_gte, 'Starting Date:' %>
               <%= f.date_field :with_date_gte, class: 'form-control'  %>
             </div>
           </div>
             
-          <div class="col-xs-12 col-sm-4 col-md-<%= (@access_level.access_level == 3) ? '2' : '3' %>">
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_date_lte, 'Ending Date:' %>
+              <%= f.date_field :with_date_lte, class: 'form-control'  %>
+            </div>
+          </div>
+            
+          <div class="col-xs-12 col-sm-4 col-md-2">
             <div class="form-group">
               <%= f.label :with_note_type, 'Type:' %>
               <%= f.select :with_note_type, @filterrific.select_options[:with_note_type], { include_blank: true }, { class: 'form-control' } %>
             </div>
           </div>
             
-          <div class="col-xs-12 col-sm-4 col-md-<%= (@access_level.access_level == 3) ? '2' : '3' %>">
+          <div class="col-xs-12 col-sm-4 col-md-2">
             <div class="form-group">
               <%= f.label :sorted_by, 'Sorted By:' %>
               <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { }, { class: 'form-control' } %>
