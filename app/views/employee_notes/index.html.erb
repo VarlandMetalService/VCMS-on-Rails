@@ -64,7 +64,7 @@
             </div>
           </div>
             
-          <div class="col-xs-12 col-sm-4 col-md-2<%= " col-sm-offset-4 col-md-offset-0" if @access_level.access_level == 2 %>">
+          <div class="col-xs-12 col-sm-4 col-md-2<%= " col-sm-offset-1 col-md-offset-0" if @access_level.access_level == 2 %>">
             <div class="form-group">
               <%= f.label :with_date_gte, 'Starting Date:' %>
               <%= f.date_field :with_date_gte, class: 'form-control'  %>
