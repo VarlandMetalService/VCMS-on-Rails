@@ -70,4 +70,8 @@ class User < ActiveRecord::Base
     order('employee_number').map { |u| ["#{u.employee_number} - #{u.full_name}", u.id] }
   end
   
+  def number_and_name
+    "#{employee_number} - #{full_name}"
+  end
+  
 end
