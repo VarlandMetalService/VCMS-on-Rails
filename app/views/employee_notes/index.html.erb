@@ -20,7 +20,7 @@
   
   <div class="col-xs-12">
     
-    <p>
+    <p class="hidden-print">
       <%= link_to 'Add Employee Note', new_employee_note_path, class: 'btn btn-success btn-sm' %>
     </p>
     
@@ -30,7 +30,7 @@
       
     <% else -%>
     
-      <%= form_for_filterrific @filterrific, { html: { class: 'bg-warning filter_form' } } do |f| %>
+      <%= form_for_filterrific @filterrific, { html: { class: 'bg-warning filter_form hidden-print' } } do |f| %>
       
         <div class="row">
       
