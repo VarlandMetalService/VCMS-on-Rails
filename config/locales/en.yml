@@ -1,9 +1,12 @@
 en:
   activerecord:
     models:
+      permission:
+        one: Permission
+        other: Permissions
       user:
-        one: Dude
-        other: Dudes
+        one: User
+        other: Users
       employee_note:
         one: Employee Note
         other: Employee Notes

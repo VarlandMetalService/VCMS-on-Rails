@@ -1,6 +1,6 @@
 class EmployeeNotesController < ApplicationController
   
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: [:edit, :update, :destroy]
   before_action :check_permission
   
   def index
@@ -48,9 +48,6 @@ class EmployeeNotesController < ApplicationController
   end
   
   def edit
-  end
-  
-  def show
   end
   
   def destroy    

@@ -17,9 +17,8 @@ gem 'filterrific',                  '2.0.5'
 gem 'will_paginate',                '~> 3.0.6'
 gem 'will_paginate-bootstrap',      '1.0.1'
 gem 'passenger',                    '5.0.21'
-# gem 'bcrypt',                     '3.1.10'
-# gem 'unicorn',                    '5.0.0'
-# gem 'capistrano-rails',           '1.1.5', group: :development
+gem 'holder_rails',                 '2.8.0'
+gem 'cocoon',                       '1.2.6'
 
 group :development, :test do
   gem 'byebug',                     '8.0.0'

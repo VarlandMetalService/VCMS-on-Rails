@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   # Constants.
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
+  # Pagination.
+  self.per_page = 50
+  
   # Associations.
   has_many      :employee_notes,
                 class_name: 'EmployeeNote',
@@ -17,6 +20,11 @@ class User < ActiveRecord::Base
   has_many      :permissions,
                 -> { select('permissions.*, assigned_permissions.value AS access_level') },
                 :through => :assigned_permissions
+  
+  accepts_nested_attributes_for   :assigned_permissions,
+                                  reject_if: :all_blank,
+                                  allow_destroy: true
+  accepts_nested_attributes_for   :permissions
   
   # Filters.
   before_save { self.email = email.downcase }
@@ -58,7 +66,7 @@ class User < ActiveRecord::Base
   
   # Shortcut method for returning user's full name.
   def full_name
-    if suffix.nil?
+    if suffix.blank?
       "#{first_name} #{last_name}"
     else
       "#{first_name} #{last_name} #{suffix}"
@@ -72,6 +80,15 @@ class User < ActiveRecord::Base
   
   def number_and_name
     "#{employee_number} - #{full_name}"
+  end
+  
+  def is_sysadmin
+    @access_level ||= permissions.find_by_permission 'sysadmin'
+    if @access_level.nil? || @access_level.access_level < 3
+      false
+    else
+      true
+    end
   end
   
 end

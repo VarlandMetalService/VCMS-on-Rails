@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require filterrific/filterrific-jquery
+//= require holder
+//= require cocoon
 //= require_tree .

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if user.nil?
       user = User.find_by(email: params[:session][:username].downcase)
     end
-    if user && user.authenticate(params[:session][:password])
+    if user && user.authenticate(params[:session][:password]) && user.is_active
       log_in user
       redirect_to root_path
     else
