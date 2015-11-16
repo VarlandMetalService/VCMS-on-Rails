@@ -40,13 +40,14 @@
                                                            :class => 'btn btn-sm btn-success',
                                                            :'data-association-insertion-node' => '#permission_users',
                                                            :'data-association-insertion-method' => 'append',
-                                                           :partial => 'assigned_permission_fields_add' %>
+                                                           :partial => 'assigned_permission_fields_add',
+                                                           :render_options => { locals: { label_set: f.object.label_set } } %>
               </td>
             </tr>
           </tfoot>
           <tbody id="permission_users">
             <%= f.fields_for :assigned_permissions do |assigned_permission| %>
-              <%= render 'assigned_permission_fields', f: assigned_permission %>
+              <%= render 'assigned_permission_fields', f: assigned_permission, label_set: f.object.label_set %>
             <% end %>
           </tbody>
         </table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110150955) do
+ActiveRecord::Schema.define(version: 20151116201721) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -42,8 +42,9 @@ ActiveRecord::Schema.define(version: 20151110150955) do
   add_index "employee_notes", ["entered_by"], name: "fk_rails_60f15ac792", using: :btree
 
   create_table "permissions", force: :cascade do |t|
-    t.string "permission",  limit: 255
-    t.string "description", limit: 255
+    t.string  "permission",  limit: 255
+    t.string  "description", limit: 255
+    t.integer "label_set",   limit: 4
   end
 
   add_index "permissions", ["permission"], name: "index_permissions_on_permission", unique: true, using: :btree
