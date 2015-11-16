@@ -11,7 +11,7 @@ protected
   def require_permission(right, level)
     @access_level ||= current_user.permissions.find_by_permission right
     if @access_level.nil? || @access_level.access_level < level
-      redirect_to(:back, flash: { error: 'Permission denied. Please contact IT if you have questions.' }) and return
+      redirect_to(root_url, flash: { error: 'Permission denied. Please contact IT if you have questions.' }) and return
     end
   end
 
