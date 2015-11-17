@@ -1,6 +1,6 @@
-<tr class="nested-fields">
+<tr class="nested-fields<%= ' danger' unless f.object.valid? %>">
   <td>
-    <%= user_name_for f.object.user_id %>
+    <%= f.collection_select(:user_id, User.all, :id, :number_and_name, { include_blank: true }, { class: 'form-control input-sm' }) %>
   </td>
   <td><%= f.select :value, options_for_select(AssignedPermission.options_for_value(label_set), f.object.value), { include_blank: false }, { class: 'form-control input-sm' } %></td>
   <td class="text-center">

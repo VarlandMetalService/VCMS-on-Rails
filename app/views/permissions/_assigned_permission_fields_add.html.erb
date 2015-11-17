@@ -1,9 +1,0 @@
-<tr class="nested-fields">
-  <td>
-    <%= f.collection_select(:user_id, User.all, :id, :number_and_name, { include_blank: true }, { class: 'form-control input-sm' }) %>
-  </td>
-  <td><%= f.select :value, options_for_select(AssignedPermission.options_for_value(label_set), f.object.value), { include_blank: false }, { class: 'form-control input-sm' } %></td>
-  <td class="text-center">
-    <%= link_to_remove_association 'Remove', f, class: 'btn btn-sm btn-danger' %>
-  </td>
-</tr>

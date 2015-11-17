@@ -44,4 +44,8 @@ module ApplicationHelper
     "<img class=\"avatar\" src=\"holder.js/#{size}x#{size}?text=#{user.initials}&bg=#{user.background_color}&fg=#{user.text_color}\" title=\"#{user.full_name}\" />".html_safe
   end
   
+  def required_field_label text
+    "#{text} <sup><i class=\"fa fa-asterisk text-danger\"></i></sup>".html_safe
+  end
+  
 end
