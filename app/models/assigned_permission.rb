@@ -1,8 +1,5 @@
 class AssignedPermission < ActiveRecord::Base
 
-  # Scope.
-  default_scope { includes(:user).order('users.employee_number ASC') }
-
   # Associations.
   belongs_to      :user
   belongs_to      :permission
