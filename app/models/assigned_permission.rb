@@ -1,18 +1,21 @@
 class AssignedPermission < ActiveRecord::Base
-  
+
+  # Scope.
+  default_scope { includes(:user).order('users.employee_number ASC') }
+
   # Associations.
   belongs_to      :user
   belongs_to      :permission
-  
+
   accepts_nested_attributes_for   :permission,
                                   reject_if: :all_blank
   accepts_nested_attributes_for   :user,
                                   reject_if: :all_blank
-  
+
   # Validations.
   validates :user_id,
             uniqueness: { scope: :permission_id, message: 'cannot be assigned more than once' }
-  
+
   # Select options for value.
   def self.options_for_value label_set = false
     case label_set
@@ -36,5 +39,5 @@ class AssignedPermission < ActiveRecord::Base
         ]
       end
   end
-  
+
 end
