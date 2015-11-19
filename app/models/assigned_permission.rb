@@ -40,6 +40,11 @@ class AssignedPermission < ActiveRecord::Base
           ['Edit Timeclock Records', '2'],
           ['Timeclock Administrator', '3']
         ]
+      when 5      # QMS Management Review
+        [
+          ['Does Not Participate in Management Review', '0'],
+          ['Participates in Management Review', '3']
+        ]
       else
         [
           ['No Access', '0'],
