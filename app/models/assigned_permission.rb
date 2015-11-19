@@ -30,9 +30,9 @@ class AssignedPermission < ActiveRecord::Base
       when 3      # QMS
         [
           ['No Access', '0'],
-          ['Read-Only', '1'],
-          ['Edit', '2'],
-          ['Admin', '3']
+          ['View Onle', '1'],
+          ['Comment', '2'],
+          ['Manage', '3']
         ]
       when 4      # Timeclock
         [
