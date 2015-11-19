@@ -45,6 +45,11 @@ class AssignedPermission < ActiveRecord::Base
           ['Does Not Participate in Management Review', '0'],
           ['Participates in Management Review', '3']
         ]
+      when 6      # Yes/No Access
+        [
+          ['No Access', '0'],
+          ['Access', '3']
+        ]
       else
         [
           ['No Access', '0'],
