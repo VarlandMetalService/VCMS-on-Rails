@@ -16,16 +16,29 @@ class AssignedPermission < ActiveRecord::Base
   # Select options for value.
   def self.options_for_value label_set = false
     case label_set
-      when 1
+      when 1      # Employee Notes
         [
           ['No Access to Employee Notes', '0'],
           ['Manage Own Notes', '2'],
           ['Manage Everybody\'s Notes', '3']
         ]
-      when 2
+      when 2      # Sysadmin
         [
           ['No Admin Access', '0'],
           ['Admin Access', '3']
+        ]
+      when 3      # QMS
+        [
+          ['No Access', '0'],
+          ['Read-Only', '1'],
+          ['Edit', '2'],
+          ['Admin', '3']
+        ]
+      when 4      # Timeclock
+        [
+          ['No Access', '0'],
+          ['Edit Timeclock Records', '2'],
+          ['Timeclock Administrator', '3']
         ]
       else
         [
