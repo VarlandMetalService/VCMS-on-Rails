@@ -30,7 +30,7 @@ class AssignedPermission < ActiveRecord::Base
       when 3      # QMS
         [
           ['No Access', '0'],
-          ['View Onle', '1'],
+          ['View Only', '1'],
           ['Comment', '2'],
           ['Manage', '3']
         ]
