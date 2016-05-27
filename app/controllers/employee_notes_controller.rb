@@ -54,7 +54,7 @@ class EmployeeNotesController < ApplicationController
     if @employee_note.destroy
       redirect_to employee_notes_url, notice: 'Successfully deleted employee note.'
     else
-      redirect_to employee_notes_url, flash: { error: 'Successfully deleted employee note.' }
+      redirect_to employee_notes_url, flash: { error: 'Error deleting employee note. Please contact IT.' }
     end
   end
 

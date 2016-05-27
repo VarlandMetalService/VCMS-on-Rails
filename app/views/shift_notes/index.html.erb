@@ -1,0 +1,111 @@
+<% provide(:title, 'Shift Notes') %>
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <div class="well well-sm">
+      <strong class="pull-left">Shift Notes</strong>
+
+      <% if @access_level.access_level == 3 -%>
+        <strong class="text-danger text-uppercase pull-right">
+          Admin Mode
+        </strong>
+      <% end %>
+
+      <div class="clearfix"><!----></div>
+
+    </div>
+
+  </div>
+
+  <div class="col-xs-12">
+
+    <p class="hidden-print">
+      <%= link_to 'Add Shift Note', new_shift_note_path, class: 'btn btn-success btn-sm' %>
+    </p>
+
+    <% if @shift_notes.size == 0 -%>
+
+      <p class="text-muted">No shift notes found.</p>
+
+    <% else -%>
+
+      <%= form_for_filterrific @filterrific, { html: { class: 'bg-warning filter_form hidden-print' } } do |f| %>
+
+        <div class="row">
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <%= f.label :search_query, 'Search:' %>
+              <%= f.text_field :search_query, class: 'form-control filterrific-periodically-observed' %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_date, 'Date:' %>
+              <%= f.date_field :with_date, class: 'form-control'  %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_shift, 'Shift:' %>
+              <%= f.select :with_shift, @filterrific.select_options[:with_shift], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <% if @access_level.access_level == 3 -%>
+            <div class="col-xs-12 col-sm-4 col-md-2">
+              <div class="form-group">
+                <%= f.label :with_entered_by, 'Entered By:' %>
+                <%= f.select :with_entered_by, @filterrific.select_options[:with_entered_by], { include_blank: true }, { class: 'form-control' } %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_department, 'Department:' %>
+              <%= f.select :with_department, @filterrific.select_options[:with_department], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_note_type, 'Type:' %>
+              <%= f.select :with_note_type, @filterrific.select_options[:with_note_type], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :sorted_by, 'Sorted By:' %>
+              <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-xs-12">
+
+            <%= render_filterrific_spinner %>
+
+            <%= link_to 'Reset Filters', reset_filterrific_url, class: 'btn btn-xs btn-warning pull-right' %>
+            <div class="clearfix"><!----></div>
+
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <div id="results"><%= render partial: 'shift_notes/list', locals: { shift_notes: @shift_notes } %></div>
+
+    <% end %>
+
+  </div>
+
+</div>

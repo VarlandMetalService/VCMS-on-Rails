@@ -1,0 +1,7 @@
+<% js = escape_javascript(
+  render(
+    :partial => 'shift_notes/list',
+    :locals => { :shift_notes => @shift_notes }
+  )
+) %>
+$('#results').html("<%= js %>");

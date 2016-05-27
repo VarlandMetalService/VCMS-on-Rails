@@ -1,5 +1,5 @@
 module ApplicationHelper
-  
+
   def bootstrap_class_for flash_type
     case flash_type
       when 'success'
@@ -16,7 +16,7 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
-  
+
   def primary_nav_link controller, action, text, reset_filterrific = false
     content_tag :li, class: (params[:controller] == controller && params[:action] == action ? 'active' : nil) do
       if reset_filterrific
@@ -26,11 +26,11 @@ module ApplicationHelper
       end
     end
   end
-  
+
   def access_level(right)
     current_user.permissions.find_by_permission right
   end
-  
+
   def full_title(page_title = '')
     base_title = 'VCMS'
     if page_title.empty?
@@ -39,13 +39,26 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
-  
+
   def avatar_for(user, size = 32)
     "<img class=\"avatar\" src=\"holder.js/#{size}x#{size}?text=#{user.initials}&bg=#{user.background_color}&fg=#{user.text_color}\" title=\"#{user.full_name}\" />".html_safe
   end
-  
+
   def required_field_label text
     "#{text} <sup><i class=\"fa fa-asterisk text-danger\"></i></sup>".html_safe
   end
-  
+
+  def department_name dept
+    case dept
+      when ''
+        ''
+      when nil
+        ''
+      when 30
+        'Waste Water'
+      else
+        "Dept. #{dept}"
+    end
+  end
+
 end

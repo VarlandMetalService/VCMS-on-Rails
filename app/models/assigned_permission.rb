@@ -18,7 +18,7 @@ class AssignedPermission < ActiveRecord::Base
     case label_set
       when 1      # Employee Notes
         [
-          ['No Access to Employee Notes', '0'],
+          ['No Access to Notes', '0'],
           ['Manage Own Notes', '2'],
           ['Manage Everybody\'s Notes', '3']
         ]
