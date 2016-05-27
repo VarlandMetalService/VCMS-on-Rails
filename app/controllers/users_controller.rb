@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :check_permission
   
   def index
-    @users = User.all.page(params[:page])
+    @users = User.all.page(params[:page]).order(:employee_number)
   end
   
   def edit
