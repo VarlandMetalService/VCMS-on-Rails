@@ -70,9 +70,11 @@ module ApplicationHelper
       when 'image/png'
         link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
       when 'video/quicktime'
-        video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        #video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
       when 'video/mp4'
-        video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        #video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
       when 'application/pdf'
         link_to "<i class=\"fa fa-file-pdf-o text-danger\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
       when 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
