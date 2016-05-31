@@ -19,11 +19,11 @@ class ShiftNotesController < ApplicationController
         }
       ) or return
 
-      if @access_level.access_level == 3
+      #if @access_level.access_level == 3
         @shift_notes = @filterrific.find.page(params[:page])
-      else
-        @shift_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
-      end
+      #else
+      #  @shift_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
+      #end
 
     rescue
 
@@ -78,7 +78,7 @@ private
   end
 
   def shift_note_params
-    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes)
+    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes, attachments_attributes: [:id, :name, :filename, :content_type, :file_contents, :file, :_destroy])
   end
 
 end

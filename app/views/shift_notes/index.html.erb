@@ -55,14 +55,12 @@
             </div>
           </div>
 
-          <% if @access_level.access_level == 3 -%>
-            <div class="col-xs-12 col-sm-4 col-md-2">
-              <div class="form-group">
-                <%= f.label :with_entered_by, 'Entered By:' %>
-                <%= f.select :with_entered_by, @filterrific.select_options[:with_entered_by], { include_blank: true }, { class: 'form-control' } %>
-              </div>
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <%= f.label :with_entered_by, 'Entered By:' %>
+              <%= f.select :with_entered_by, @filterrific.select_options[:with_entered_by], { include_blank: true }, { class: 'form-control' } %>
             </div>
-          <% end %>
+          </div>
 
           <div class="col-xs-12 col-sm-4 col-md-2">
             <div class="form-group">
@@ -102,7 +100,7 @@
 
       <% end %>
 
-      <div id="results"><%= render partial: 'shift_notes/list', locals: { shift_notes: @shift_notes } %></div>
+      <div id="results"><%= render partial: 'shift_notes/list', locals: { shift_notes: @shift_notes, current_user: @current_user, access_level: @access_level.access_level } %></div>
 
     <% end %>
 

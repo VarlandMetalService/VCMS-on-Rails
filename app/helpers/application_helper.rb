@@ -44,11 +44,11 @@ module ApplicationHelper
     "<img class=\"avatar\" src=\"holder.js/#{size}x#{size}?text=#{user.initials}&bg=#{user.background_color}&fg=#{user.text_color}\" title=\"#{user.full_name}\" />".html_safe
   end
 
-  def required_field_label text
+  def required_field_label(text)
     "#{text} <sup><i class=\"fa fa-asterisk text-danger\"></i></sup>".html_safe
   end
 
-  def department_name dept
+  def department_name(dept)
     case dept
       when ''
         ''
@@ -58,6 +58,29 @@ module ApplicationHelper
         'Waste Water'
       else
         "Dept. #{dept}"
+    end
+  end
+
+  def show_attachment attachment
+    case attachment.content_type
+      when 'image/jpeg'
+        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+      when 'image/gif'
+        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+      when 'image/png'
+        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+      when 'video/quicktime'
+        video_tag attachment_path(attachment), class: 'img-responsive', controls: 'controls'
+      when 'application/pdf'
+        link_to "<i class=\"fa fa-file-pdf-o text-danger\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
+      when 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        link_to "<i class=\"fa fa-file-excel-o text-success\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+      when 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        link_to "<i class=\"fa fa-file-word-o text-primary\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+      when 'application/zip'
+        link_to "<i class=\"fa fa-file-archive-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+      else
+        link_to "<i class=\"fa fa-file-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
     end
   end
 

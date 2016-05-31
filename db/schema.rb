@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527184943) do
+ActiveRecord::Schema.define(version: 20160531140053) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20160527184943) do
 
   add_index "assigned_permissions", ["permission_id"], name: "fk_rails_aca282a7fd", using: :btree
   add_index "assigned_permissions", ["user_id"], name: "fk_rails_324ef26984", using: :btree
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "attachable_id",   limit: 4
+    t.string   "attachable_type", limit: 255
+    t.string   "name",            limit: 255
+    t.string   "filename",        limit: 255
+    t.string   "content_type",    limit: 255
+    t.binary   "file_contents",   limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "employee_notes", force: :cascade do |t|
     t.integer  "employee",     limit: 4

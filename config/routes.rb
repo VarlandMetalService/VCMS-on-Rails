@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :shift_notes
   resources :users
   resources :permissions
+  resources :attachments
 
 end

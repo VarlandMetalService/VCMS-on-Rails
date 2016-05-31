@@ -9,7 +9,8 @@
         <th class="col-xs-1 text-center">By</th>
         <th class="col-xs-1 text-center">Department</th>
         <th class="col-xs-1 text-center">Type</th>
-        <th class="col-xs-6">Notes</th>
+        <th class="col-xs-4">Notes</th>
+        <th class="col-xs-2">Attachments</th>
         <th class="col-xs-1 text-center hidden-print">Options</th>
       </tr>
     </thead>
@@ -22,9 +23,16 @@
           <td class="text-center"><%= department_name(n.department) %></td>
           <td class="text-center"><%= n.note_type %></td>
           <td><%= n.formatted_notes %></td>
+          <td>
+            <% n.attachments.each do |a| -%>
+              <p><%= show_attachment a %></p>
+            <% end %>
+          </td>
           <td class="text-center hidden-print">
-            <%= link_to 'Edit', edit_shift_note_path(n), class: 'btn btn-xs btn-default'  %>
-            <%= link_to 'Delete', n, method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure you want to delete this note?' }  %>
+            <% if access_level == 3 || current_user == n.author -%>
+              <%= link_to 'Edit', edit_shift_note_path(n), class: 'btn btn-xs btn-default'  %>
+              <%= link_to 'Delete', n, method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure you want to delete this note?' }  %>
+            <% end %>
           </td>
         </tr>
       <% end %>

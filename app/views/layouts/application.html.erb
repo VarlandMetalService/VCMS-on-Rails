@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
-  
+
   <head>
-    
+
     <title><%= full_title(yield(:title)) %></title>
-    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black" />
+
     <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
       </script>
     <![endif]-->
-    
+
   </head>
-  
+
   <body>
-        
+
     <%= render partial: 'shared/nav' %>
-  
+
     <div class="container-fluid">
-    
+
       <%= render partial: 'shared/flash_messages', flash: flash %>
-    
+
       <%= yield %>
-    
+
     </div>
-  
+
   </body>
 
 </html>

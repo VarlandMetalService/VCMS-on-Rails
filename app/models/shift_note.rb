@@ -10,6 +10,13 @@ class ShiftNote < ActiveRecord::Base
   belongs_to    :author,
                 class_name: 'User',
                 foreign_key: 'entered_by'
+  has_many      :attachments,
+                as: :attachable,
+                dependent: :destroy
+
+  accepts_nested_attributes_for   :attachments,
+                                  reject_if: :all_blank,
+                                  allow_destroy: true
 
   # Validations.
   validates :entered_by,
@@ -20,8 +27,8 @@ class ShiftNote < ActiveRecord::Base
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 3 }
   validates :ip_address,
-            presence: true #,
-            #format: { with: VALID_IP_REGEX }
+            presence: true,
+            format: { with: VALID_IP_REGEX }
   validates :department,
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 30 },
             allow_nil: true,
@@ -126,6 +133,26 @@ class ShiftNote < ActiveRecord::Base
 
   def formatted_notes
     notes.gsub(/\r\n/, '<br />').html_safe
+  end
+
+  def initialize(params = {})
+    super
+    current_time = Time.new
+    today = Date.today
+    case current_time.hour
+      when 0..6
+        self.shift = 3
+        self.note_on = today - 1
+      when 7..14
+        self.shift = 1
+        self.note_on = today
+      when 13..22
+        self.shift = 2
+        self.note_on = today
+      when 23
+        self.shift = 3
+        self.note_on = today
+    end
   end
 
 end

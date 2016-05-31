@@ -57,14 +57,13 @@ class User < ActiveRecord::Base
 
   # Uses RestClient to authenticate user on IBM System i.
   def authenticate(password = '')
-    true
-    #begin
-    #  response = RestClient.get 'http://api.varland.com/v1/auth', params: { user:     self.username,
-    #                                                                        password: password }
-    #  response == '1' ? true : false
-    #rescue => e
-    #  false
-    #end
+    begin
+      response = RestClient.get 'http://api.varland.com/v1/auth', params: { user:     self.username,
+                                                                            password: password }
+      response == '1' ? true : false
+    rescue => e
+      false
+    end
   end
 
   # Shortcut method for returning user's full name.
