@@ -1,5 +1,7 @@
 class AttachmentsController < ApplicationController
 
+  skip_before_filter :require_login
+
   def show
     @attachment = Attachment.find params[:id]
     send_data(@attachment.file_contents,
