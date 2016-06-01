@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '12:00 pm' do
-  runner "DailyShiftNotesMailer.daily_summary_email.deliver_now"
+every 1.day, :at => '12:10 pm' do
+  rake 'send_daily_shift_notes'
 end
