@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
-  
+
   protect_from_forgery with: :exception
-  
+
   before_filter :require_login
-  
+
   include SessionsHelper
-  
+
 protected
 
   def require_permission(right, level)
@@ -17,8 +17,10 @@ protected
 
   def require_login
     unless logged_in?
+      session[:return_to] = request.fullpath
       redirect_to(login_url) and return
     end
+    session.delete(:return_to)
   end
-  
+
 end
