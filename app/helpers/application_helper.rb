@@ -88,4 +88,8 @@ module ApplicationHelper
     end
   end
 
+  def show_attachment_email attachment
+    link_to "#{attachment.name}".html_safe, attachment_path(attachment, :only_path => false), target: '_blank'
+  end
+
 end
