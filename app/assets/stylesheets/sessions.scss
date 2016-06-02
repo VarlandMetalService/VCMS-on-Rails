@@ -1,3 +1,61 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login {
+
+  /* Layout */
+  align-items: center;
+  display: flex;
+  padding-top: 0 !important;
+
+  /* Background */
+  background-color: #eeeeee;
+
+  .login-form-container {
+
+    /* Layout */
+    overflow: auto;
+    padding-bottom: 15px !important;
+    padding-top: 15px !important;
+
+    /* Decoration */
+    box-shadow: 0 0 10px #ccc;
+
+    /* Background */
+    background-color: #fff;
+
+  }
+
+  .mobile-login-button {
+
+    /* Typography */
+    font-size: 130%;
+
+    /* Size */
+    height: 70px;
+    width: 70px;
+
+    /* Layout */
+    margin-top: 15px;
+
+    /* Decoration */
+    border-radius: 100%;
+
+  }
+
+}
+
+input[readonly] {
+
+  /* Background */
+  background-color: #fff !important;
+
+}
+
+.form-group:last-child {
+
+  /* Layout */
+  margin-bottom: 0 !important;
+
+}

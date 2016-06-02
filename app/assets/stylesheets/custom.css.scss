@@ -4,122 +4,96 @@
 $default-spacing: 15px;
 
 html, body {
-  
+
   /* Size */
   height: 100%;
-  
+
 }
 
 body {
-  
+
   /* Layout */
   padding-top: 50px + $default-spacing;
-  
+
 }
 
 .avatar {
-  
+
   /* Decoration */
   border-radius: 100%;
-  
+
 }
 
 .filterrific_spinner {
-  
+
   /* Position */
   clear: none;
   float: left;
-  
+
 }
 
 .popover-title {
-  
+
   /* Typography */
   font-weight: bold;
-  
+
 }
 
 .navbar {
-  
+
   .navbar-brand {
-    
+
     /* Layout */
     padding: 5px 15px;
-    
+
   }
-  
+
   img {
-    
+
     /* Size */
     max-height: 40px;
-    
+
     /* Layout */
     display: block;
     margin: 0;
     padding: 0;
-  
-  }
-  
-}
 
-.login {
-  
-  /* Layout */
-  align-items: center;
-  display: flex;
-  
-  /* Background */
-  background-color: #eeeeee;
-  
-  .login-form-container {
-    
-    /* Layout */
-    overflow: auto;
-    padding-bottom: 15px !important;
-    padding-top: 15px !important;
-    
-    /* Decoration */
-    box-shadow: 0 0 10px #ccc;
-    
-    /* Background */
-    background-color: #fff;
-    
   }
-  
+
 }
 
 .error_explanation {
-  
+
   /* Layout */
   margin-bottom: $default-spacing;
   overflow: auto;
-  
+
   p {
-    
+
     /* Typography */
     font-weight: bold;
-    
+
     /* Layout */
     margin: $default-spacing $default-spacing ($default-spacing / 2);
-    
+
   }
-  
+
 }
 
 .pagination {
-  
+
   /* Layout */
   margin-top: 0;
-  
+
 }
 
 .filter_form {
-  
+
   /* Layout */
   margin-bottom: $default-spacing;
   padding: $default-spacing;
-  
+
   /* Decoration */
   border: 1px solid rgb(221, 221, 221);
-  
+
 }
