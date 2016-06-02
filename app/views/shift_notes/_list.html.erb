@@ -19,7 +19,7 @@
         <tr>
           <td class="text-center"><%= n.note_on.strftime '%m/%d/%y' %></td>
           <td class="text-center"><%= n.shift %></td>
-          <td class="text-center"><%= n.author.initials %></td>
+          <td class="text-center"><abbr title="<%= n.author.full_name %>"><%= n.author.initials %></abbr></td>
           <td class="text-center"><%= department_name(n.department) %></td>
           <td class="text-center"><%= n.note_type %></td>
           <td><%= n.formatted_notes %></td>
