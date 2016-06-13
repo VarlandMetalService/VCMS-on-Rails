@@ -64,32 +64,32 @@ module ApplicationHelper
   def show_attachment attachment
     case attachment.content_type
       when 'image/jpeg'
-        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+        link_to(image_tag(attachment.file.url, class: 'img-responsive'), attachment.file.url, target: '_blank')
       when 'image/gif'
-        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+        link_to(image_tag(attachment.file.url, class: 'img-responsive'), attachment.file.url, target: '_blank')
       when 'image/png'
-        link_to(image_tag(attachment_path(attachment), class: 'img-responsive'), attachment_path(attachment), target: '_blank')
+        link_to(image_tag(attachment.file.url, class: 'img-responsive'), attachment.file.url, target: '_blank')
       when 'video/quicktime'
-        #video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
-        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
+        #video_tag attachment.file.url, class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url, target: '_blank'
       when 'video/mp4'
-        #video_tag attachment_path(attachment), class: 'img-responsive', controls: 'true', type: 'video/mp4'
-        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
+        #video_tag attachment.file.url, class: 'img-responsive', controls: 'true', type: 'video/mp4'
+        link_to "<i class=\"fa fa-file-video-o\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url, target: '_blank'
       when 'application/pdf'
-        link_to "<i class=\"fa fa-file-pdf-o text-danger\"></i> #{attachment.name}".html_safe, attachment_path(attachment), target: '_blank'
+        link_to "<i class=\"fa fa-file-pdf-o text-danger\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url, target: '_blank'
       when 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        link_to "<i class=\"fa fa-file-excel-o text-success\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+        link_to "<i class=\"fa fa-file-excel-o text-success\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url
       when 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        link_to "<i class=\"fa fa-file-word-o text-primary\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+        link_to "<i class=\"fa fa-file-word-o text-primary\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url
       when 'application/zip'
-        link_to "<i class=\"fa fa-file-archive-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+        link_to "<i class=\"fa fa-file-archive-o\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url
       else
-        link_to "<i class=\"fa fa-file-o\"></i> #{attachment.name}".html_safe, attachment_path(attachment)
+        link_to "<i class=\"fa fa-file-o\"></i> #{attachment.file_identifier}".html_safe, attachment.file.url
     end
   end
 
   def show_attachment_email attachment
-    link_to "#{attachment.name}".html_safe, attachment_path(attachment, :only_path => false), target: '_blank'
+    link_to "#{attachment.file_identifier}".html_safe, attachment.file.url, target: '_blank'
   end
 
 end

@@ -1,5 +1,9 @@
 class Attachment < ActiveRecord::Base
 
+  # CarrierWave uploader support.
+  mount_uploader  :file,
+                  FileUploader
+
   # Associations.
   belongs_to      :attachable,
                   polymorphic: true
@@ -10,22 +14,5 @@ class Attachment < ActiveRecord::Base
   # Constants.
 
   # Validations.
-
-  def initialize(params = {})
-    @file = params.delete(:file)
-    super
-    if @file
-      self.filename = sanitize_filename(@file.original_filename)
-      self.name = self.filename if self.name.blank?
-      self.content_type = @file.content_type
-      self.file_contents = @file.read
-    end
-  end
-
-private
-
-  def sanitize_filename(filename)
-    return File.basename(filename)
-  end
 
 end

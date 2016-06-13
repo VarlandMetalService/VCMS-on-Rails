@@ -19,6 +19,8 @@ gem 'will_paginate-bootstrap',      '1.0.1'
 gem 'passenger',                    '5.0.21'
 gem 'holder_rails',                 '2.8.0'
 gem 'cocoon',                       '1.2.6'
+gem 'carrierwave',                  '~> 0.10.0'
+gem 'mini_magick',                  '~> 4.3'
 
 group :development, :test do
   gem 'byebug',                     '8.0.0'
