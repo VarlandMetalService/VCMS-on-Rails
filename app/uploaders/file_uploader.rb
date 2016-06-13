@@ -4,8 +4,17 @@ class FileUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
   include CarrierWave::MimeTypes
+
+  process :fix_exif_rotation
+  def fix_exif_rotation
+    if file.content_type == 'image/jpeg'
+      manipulate! do |img|
+        img.tap(&:auto_orient)
+      end
+    end
+  end
 
   process :set_content_type
   process :save_content_type_in_model
@@ -40,9 +49,9 @@ class FileUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :resize_to_fit => [50, 50]
-  # end
+  version :thumb, if: :is_img? do
+    process :resize_to_fit => [200, 5000]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -55,5 +64,11 @@ class FileUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+private
+
+  def is_img? file
+    file.content_type.start_with?('image')
+  end
 
 end
