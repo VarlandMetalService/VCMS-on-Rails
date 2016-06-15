@@ -45,11 +45,11 @@ class ShiftNote < ActiveRecord::Base
   def send_specific_note_email
     case self.note_type
       when 'IT'
-        DailyShiftNotesMailer.specific_note_email(self, 'it').deliver_now
+        DailyShiftNotesMailer.specific_note_email(self, 'it').deliver_later
       when 'Lab'
-        DailyShiftNotesMailer.specific_note_email(self, 'lab').deliver_now
+        DailyShiftNotesMailer.specific_note_email(self, 'lab').deliver_later
       when 'Maintenance'
-        DailyShiftNotesMailer.specific_note_email(self, 'maintenance').deliver_now
+        DailyShiftNotesMailer.specific_note_email(self, 'maintenance').deliver_later
       else
         return
     end
