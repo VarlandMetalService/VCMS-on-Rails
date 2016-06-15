@@ -146,10 +146,6 @@ class ShiftNote < ActiveRecord::Base
     users.map { |u| [u.full_name, u.id] }
   end
 
-  def formatted_notes
-    notes.gsub(/\r\n/, '<br />').html_safe
-  end
-
   def initialize(params = {})
     super
     current_time = Time.new

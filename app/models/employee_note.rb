@@ -1,11 +1,11 @@
 class EmployeeNote < ActiveRecord::Base
-  
+
   # Constants.
   VALID_IP_REGEX = /\A([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}\z/i
-  
+
   # Pagination.
   self.per_page = 50
-  
+
   # Associations.
   belongs_to    :subject,
                 class_name: 'User',
@@ -13,7 +13,7 @@ class EmployeeNote < ActiveRecord::Base
   belongs_to    :author,
                 class_name: 'User',
                 foreign_key: 'entered_by'
-  
+
   # Validations.
   validates :subject,
             presence: true
@@ -29,7 +29,7 @@ class EmployeeNote < ActiveRecord::Base
             format: { with: VALID_IP_REGEX }
   validates :notes,
             presence: true
-  
+
   # Filtering.
   filterrific(
     default_filter_params: { sorted_by: 'note_on DESC' },
@@ -43,14 +43,14 @@ class EmployeeNote < ActiveRecord::Base
       :with_date_lte
     ]
   )
-  
+
   # Scopes.
   scope :sorted_by, ->(sort_option) {
     order sort_option
   }
   scope :search_query, ->(query) {
-    where 'notes like ? or follow_up like ?', "%#{query}%", "%#{query}%"   
-  }  
+    where 'notes like ? or follow_up like ?', "%#{query}%", "%#{query}%"
+  }
   scope :with_employee, ->(values) {
     where employee: [*values]
   }
@@ -66,7 +66,7 @@ class EmployeeNote < ActiveRecord::Base
   scope :with_date_lte, ->(value) {
     where 'note_on <= ?', value
   }
-  
+
   # Select options for type.
   def self.options_for_type
     [
@@ -75,7 +75,7 @@ class EmployeeNote < ActiveRecord::Base
       ['Neutral', 'Neutral']
     ]
   end
-  
+
   # Select options for sorted by.
   def self.options_for_sorted_by
     [
@@ -83,18 +83,11 @@ class EmployeeNote < ActiveRecord::Base
       ['Date (newest first)', 'note_on DESC']
     ]
   end
-  
+
   # Select options for entered by.
   def self.options_for_entered_by
     users = User.where id: EmployeeNote.uniq.pluck(:entered_by)
     users.map { |u| [u.full_name, u.id] }
   end
-  
-  def formatted_notes
-    notes.gsub(/\r\n/, '<br />').html_safe
-  end
-  def formatted_follow_up
-    follow_up.gsub(/\r\n/, '<br />').html_safe
-  end
-  
+
 end

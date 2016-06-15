@@ -20,12 +20,12 @@
           <td class="text-center"><%= n.author.initials %></td>
           <td class="text-center"><%= n.note_type %></td>
           <td>
-            <%= n.formatted_notes %>
+            <%= format_line_breaks n.notes %>
             <% unless n.follow_up.blank? -%>
               <br />
               <br />
               <small><strong class="text-uppercase">Follow Up<%= " on #{n.follow_up_on.strftime('%m/%d/%y')}" unless n.follow_up_on.nil? %>:</strong></small><br />
-              <%= n.formatted_follow_up %>
+              <%= format_line_breaks n.follow_up %>
             <% end %>
           </td>
           <td class="text-center hidden-print">

@@ -6,7 +6,7 @@
 </p>
 <div style="<%= @clearfix %>"><!----></div>
 <div style="<%= @well %>">
-  <p style="<%= @p %>"><%= @note.formatted_notes %></p>
+  <p style="<%= @p %>"><%= format_line_breaks @note.notes %></p>
   <% if @note.attachments.size > 0 -%>
     <p style="<%= @p_half_margin %>"><small><strong style="text-transform: uppercase;">Attachments:</strong></small></p>
     <ul style="<%= @list_group %>">

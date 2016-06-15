@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def format_line_breaks text
+    text.gsub(/\r\n/, '<br />').html_safe
+  end
+
   def bootstrap_class_for flash_type
     case flash_type
       when 'success'
