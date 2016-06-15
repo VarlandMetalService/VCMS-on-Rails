@@ -1,0 +1,18 @@
+<h1 style="<%= @h1 %>">Shift Note Alert</h1>
+<p style="<%= @p %> margin-top: 1em;">
+  <span style="float: left;">Note entered by <strong><%= @note.author.full_name %></strong>:</span>
+  <% if @note.department? -%><span style="<%= @capsule %> background-color: #71cdff; float: right;"><%= department_name @note.department %></span><% end %>
+  <% if @note.note_type? -%><span style="<%= @capsule %> background-color: #62fda0; float: right;"><%= @note.note_type %></span><% end %>
+</p>
+<div style="<%= @clearfix %>"><!----></div>
+<div style="<%= @well %>">
+  <p style="<%= @p %>"><%= @note.formatted_notes %></p>
+  <% if @note.attachments.size > 0 -%>
+    <p style="<%= @p_half_margin %>"><small><strong style="text-transform: uppercase;">Attachments:</strong></small></p>
+    <ul style="<%= @list_group %>">
+      <% @note.attachments.each_with_index do |a, i| %>
+        <li style="<%= i == @note.attachments.size - 1 ? @list_group_li_bottom : @list_group_li %>"><%= show_attachment_email a %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

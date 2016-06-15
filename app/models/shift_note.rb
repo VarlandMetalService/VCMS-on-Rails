@@ -40,6 +40,21 @@ class ShiftNote < ActiveRecord::Base
   validates :notes,
             presence: true
 
+  # Send email after create.
+  after_create :send_specific_note_email
+  def send_specific_note_email
+    case self.note_type
+      when 'IT'
+        DailyShiftNotesMailer.specific_note_email(self, 'it').deliver_now
+      when 'Lab'
+        DailyShiftNotesMailer.specific_note_email(self, 'lab').deliver_now
+      when 'Maintenance'
+        DailyShiftNotesMailer.specific_note_email(self, 'maintenance').deliver_now
+      else
+        return
+    end
+  end
+
   # Filtering.
   filterrific(
     default_filter_params: { sorted_by: 'note_on DESC, shift DESC, created_at DESC' },

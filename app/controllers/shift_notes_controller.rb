@@ -78,7 +78,7 @@ private
   end
 
   def shift_note_params
-    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes, attachments_attributes: [:id, :name, :filename, :content_type, :file_contents, :file, :_destroy])
+    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes, attachments_attributes: [:id, :content_type, :file, :_destroy])
   end
 
 end
