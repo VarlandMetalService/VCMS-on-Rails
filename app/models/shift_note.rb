@@ -10,6 +10,9 @@ class ShiftNote < ActiveRecord::Base
   belongs_to    :author,
                 class_name: 'User',
                 foreign_key: 'entered_by'
+  belongs_to    :supervisor,
+                class_name: 'User',
+                foreign_key: 'supervisor_id'
   has_many      :attachments,
                 as: :attachable,
                 dependent: :destroy
@@ -39,6 +42,11 @@ class ShiftNote < ActiveRecord::Base
             allow_blank: true
   validates :notes,
             presence: true
+
+  def store_supervisor_info supervisor
+    self.supervisor = supervisor
+    self.supervisor_notes_at = Time.new
+  end
 
   # Send email after create.
   after_create :send_specific_note_email

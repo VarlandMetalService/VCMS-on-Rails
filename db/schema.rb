@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613160449) do
+ActiveRecord::Schema.define(version: 20160615195329) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -59,15 +59,18 @@ ActiveRecord::Schema.define(version: 20160613160449) do
   add_index "permissions", ["permission"], name: "index_permissions_on_permission", unique: true, using: :btree
 
   create_table "shift_notes", force: :cascade do |t|
-    t.integer  "entered_by", limit: 4
+    t.integer  "entered_by",          limit: 4
     t.date     "note_on"
-    t.integer  "shift",      limit: 4
-    t.string   "ip_address", limit: 255
-    t.integer  "department", limit: 4
-    t.string   "note_type",  limit: 255
-    t.text     "notes",      limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "shift",               limit: 4
+    t.string   "ip_address",          limit: 255
+    t.integer  "department",          limit: 4
+    t.string   "note_type",           limit: 255
+    t.text     "notes",               limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "supervisor_notes",    limit: 65535
+    t.datetime "supervisor_notes_at"
+    t.integer  "supervisor_id",       limit: 4
   end
 
   add_index "shift_notes", ["entered_by"], name: "fk_rails_8c4d173e86", using: :btree

@@ -22,7 +22,15 @@
           <td class="text-center"><abbr title="<%= n.author.full_name %>"><%= n.author.initials %></abbr></td>
           <td class="text-center"><%= department_name(n.department) %></td>
           <td class="text-center"><%= n.note_type %></td>
-          <td><%= format_line_breaks n.notes %></td>
+          <td>
+            <%= format_line_breaks n.notes %>
+            <% unless n.supervisor_notes.blank? -%>
+              <br />
+              <br />
+              <small><strong class="text-uppercase">Follow Up by <%= n.supervisor.full_name %> on <%= n.supervisor_notes_at.strftime('%m/%d/%y') %>:</strong></small><br />
+              <%= format_line_breaks n.supervisor_notes %>
+            <% end %>
+          </td>
           <td>
             <% n.attachments.each do |a| -%>
               <p><%= show_attachment a %></p>

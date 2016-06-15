@@ -52,6 +52,9 @@ class ShiftNotesController < ApplicationController
   end
 
   def update
+    if @shift_note.supervisor_notes != shift_note_params[:supervisor_notes]
+      @shift_note.store_supervisor_info @current_user
+    end
     if @shift_note.update shift_note_params
       redirect_to shift_notes_url, notice: 'Successfully updated shift note.'
     else
@@ -78,7 +81,7 @@ private
   end
 
   def shift_note_params
-    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes, attachments_attributes: [:id, :content_type, :file, :_destroy])
+    params.require(:shift_note).permit(:note_on, :shift, :department, :note_type, :notes, :supervisor_notes, attachments_attributes: [:id, :content_type, :file, :_destroy])
   end
 
 end

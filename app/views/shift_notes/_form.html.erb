@@ -63,6 +63,19 @@
 
         </div>
 
+        <% unless @shift_note.id.nil? || @access_level.access_level < 3 -%>
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="form-group<%= ' has-error' if @shift_note.errors[:supervisor_notes].any? %>">
+                <%= f.label :supervisor_notes, 'Supervisor Notes:', class: 'control-label' %>
+                <%= f.text_area :supervisor_notes, { class: 'form-control', rows: 8 } %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+
       </div>
 
       <div class="col-xs-12 col-sm-12 col-md-6">
