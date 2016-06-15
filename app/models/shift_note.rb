@@ -120,8 +120,8 @@ class ShiftNote < ActiveRecord::Base
   # Select options for sorted by.
   def self.options_for_sorted_by
     [
-      ['Date (oldest first)', 'note_on, shift, created_at'],
-      ['Date (newest first)', 'note_on DESC, shift DESC, created_at DESC']
+      ['Date (newest first)', 'note_on DESC, shift DESC, created_at DESC'],
+      ['Date (oldest first)', 'note_on, shift, created_at']
     ]
   end
 
