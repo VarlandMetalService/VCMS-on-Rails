@@ -3,7 +3,7 @@ class DailyShiftNotesMailer < ApplicationMailer
   helper  :application
 
   default from: 'varlandmetalservice@gmail.com',
-          to: ['Toby Varland <toby.varland@varland.com>', 'Toby Varland <varland@gmail.com>']
+          to: ['Shift Notes Recipients <dailyshiftnotes@varland.com>']
 
   def daily_summary_email
     @yesterday = Date.today - 1
