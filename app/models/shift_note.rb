@@ -42,7 +42,7 @@ class ShiftNote < ActiveRecord::Base
 
   # Filtering.
   filterrific(
-    default_filter_params: { sorted_by: 'note_on DESC, shift DESC' },
+    default_filter_params: { sorted_by: 'note_on DESC, shift DESC, created_at DESC' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -120,8 +120,8 @@ class ShiftNote < ActiveRecord::Base
   # Select options for sorted by.
   def self.options_for_sorted_by
     [
-      ['Date (oldest first)', 'note_on, shift'],
-      ['Date (newest first)', 'note_on DESC, shift DESC']
+      ['Date (oldest first)', 'note_on, shift, created_at'],
+      ['Date (newest first)', 'note_on DESC, shift DESC, created_at DESC']
     ]
   end
 
