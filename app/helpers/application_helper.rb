@@ -89,7 +89,7 @@ module ApplicationHelper
   end
 
   def show_attachment_email attachment
-    link_to "#{attachment.file_identifier}".html_safe, attachment.file.url, target: '_blank'
+    link_to "#{attachment.file_identifier}".html_safe, "http://vcms.varland.com#{attachment.file.url}", target: '_blank'
   end
 
 end
