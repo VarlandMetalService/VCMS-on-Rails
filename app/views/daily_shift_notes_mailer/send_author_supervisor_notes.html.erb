@@ -1,6 +1,6 @@
-<h1 style="<%= @h1 %>">Shift Note Alert</h1>
+<h1 style="<%= @h1 %>">Supervisor Commented on Shift Note</h1>
 <p style="<%= @p %> margin-top: 1em;">
-  <span style="float: left;">Note entered by <strong><%= @note.author.full_name %></strong> on <%= @note.note_on.strftime '%m/%d/%y' %> on <%= @note.shift.ordinalize %> shift:</span>
+  <span style="float: left;">You entered the following note on <%= @note.note_on.strftime '%m/%d/%y' %> on <%= @note.shift.ordinalize %> shift:</span>
   <% if @note.department? -%><span style="<%= @capsule %> background-color: #71cdff; float: right;"><%= department_name @note.department %></span><% end %>
   <% if @note.note_type? -%><span style="<%= @capsule %> background-color: #62fda0; float: right;"><%= @note.note_type %></span><% end %>
 </p>
@@ -15,4 +15,8 @@
       <% end %>
     </ul>
   <% end %>
+</div>
+<p style="<%= @p_bold_caps %> margin-top: 1em;"><%= @note.supervisor.full_name %> added notes on <%= @note.supervisor_notes_at.strftime '%m/%d/%y' %>:</p>
+<div style="<%= @well %>">
+  <p style="<%= @p_no_margin %>"><%= format_line_breaks @note.supervisor_notes %></p>
 </div>

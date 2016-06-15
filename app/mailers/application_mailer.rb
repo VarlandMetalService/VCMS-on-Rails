@@ -13,6 +13,7 @@ protected
     @h2 = 'margin: 1em 0 0; padding: 0; line-height: 1; font-size: 20px; font-weight: 500;'
     @code = 'color: #c7254e; background-color: #f9f2f4; font-family: Menlo, Monaco, Consolas, \'Courier New\', monospace;'
     @p = 'margin: 0 0 1em; padding: 0; line-height: 1.4;'
+    @p_bold_caps = "#{@p} font-weight: bold; text-transform: uppercase; font-size: 80%;";
     @p_no_margin = 'margin: 0; padding: 0; line-height: 1.4;'
     @p_half_margin = 'margin: 0 0 0.5em; padding: 0; line-height: 1.4;'
     @well = 'margin: 0 0 1em; padding: 1em; background-color: #eeeeee; margin-top: 0.5em; border-radius: 10px;'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615195329) do
+ActiveRecord::Schema.define(version: 20160615202532) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20160615195329) do
     t.text     "supervisor_notes",    limit: 65535
     t.datetime "supervisor_notes_at"
     t.integer  "supervisor_id",       limit: 4
+    t.boolean  "author_email_needed"
   end
 
   add_index "shift_notes", ["entered_by"], name: "fk_rails_8c4d173e86", using: :btree

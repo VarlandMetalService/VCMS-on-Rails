@@ -46,6 +46,17 @@ class ShiftNote < ActiveRecord::Base
   def store_supervisor_info supervisor
     self.supervisor = supervisor
     self.supervisor_notes_at = Time.new
+    self.author_email_needed = true
+  end
+
+  # Email author after update if necessary.
+  after_update :send_author_follow_up
+  def send_author_follow_up
+    if self.author_email_needed
+      DailyShiftNotesMailer.send_author_supervisor_notes(self).deliver_later
+      self.author_email_needed = false
+      self.save(validate: false)
+    end
   end
 
   # Send email after create.

@@ -5,6 +5,12 @@ class DailyShiftNotesMailer < ApplicationMailer
   default from: 'varlandmetalservice@gmail.com',
           to: ['Shift Notes Recipients <dailyshiftnotes@varland.com>']
 
+  def send_author_supervisor_notes note
+    @note = note
+    mail(subject: 'Supervisor Commented on Shift Note',
+         to: ["#{@note.author.full_name} <#{@note.author.email}>", "#{@note.supervisor.full_name} <#{@note.supervisor.email}>"])
+  end
+
   def specific_note_email note, group
     @note = note
     recipient = nil
