@@ -18,6 +18,7 @@ class DailyShiftNotesMailer < ApplicationMailer
       else
         return
     end
+    recipient = 'Toby Varland <toby.varland@varland.com>'
     mail(subject: 'Shift Note Alert',
          to: recipient)
   end
