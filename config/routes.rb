@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   resources :permissions
   resources :attachments
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+
 end

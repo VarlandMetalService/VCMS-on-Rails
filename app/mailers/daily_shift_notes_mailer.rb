@@ -6,13 +6,13 @@ class DailyShiftNotesMailer < ApplicationMailer
           to: ['Shift Notes Recipients <dailyshiftnotes@varland.com>']
 
   def send_author_supervisor_notes note
-    @note = note
+    @note = ShiftNote.find(note)
     mail(subject: 'Supervisor Commented on Shift Note',
          to: ["#{@note.author.full_name} <#{@note.author.email}>", "#{@note.supervisor.full_name} <#{@note.supervisor.email}>"])
   end
 
   def specific_note_email note, group
-    @note = note
+    @note = ShiftNote.find(note)
     recipient = nil
     case group
       when 'it'
@@ -24,7 +24,7 @@ class DailyShiftNotesMailer < ApplicationMailer
       else
         return
     end
-    # recipient = 'Toby Varland <toby.varland@varland.com>'
+    recipient = 'Toby Varland <toby.varland@varland.com>'
     mail(subject: 'Shift Note Alert',
          to: recipient)
   end

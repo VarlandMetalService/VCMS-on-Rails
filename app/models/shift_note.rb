@@ -53,7 +53,7 @@ class ShiftNote < ActiveRecord::Base
   after_update :send_author_follow_up
   def send_author_follow_up
     if self.author_email_needed
-      DailyShiftNotesMailer.send_author_supervisor_notes(self).deliver_later
+      DailyShiftNotesMailer.delay.send_author_supervisor_notes(self.id)
       self.author_email_needed = false
       self.save(validate: false)
     end
@@ -64,11 +64,11 @@ class ShiftNote < ActiveRecord::Base
   def send_specific_note_email
     case self.note_type
       when 'IT'
-        DailyShiftNotesMailer.specific_note_email(self, 'it').deliver_later
+        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'it')
       when 'Lab'
-        DailyShiftNotesMailer.specific_note_email(self, 'lab').deliver_later
+        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'lab')
       when 'Maintenance'
-        DailyShiftNotesMailer.specific_note_email(self, 'maintenance').deliver_later
+        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'maintenance')
       else
         return
     end
