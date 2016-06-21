@@ -19,11 +19,7 @@ class ShiftNotesController < ApplicationController
         }
       ) or return
 
-      #if @access_level.access_level == 3
-        @shift_notes = @filterrific.find.page(params[:page])
-      #else
-      #  @shift_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
-      #end
+      @shift_notes = @filterrific.find.page(params[:page])
 
     rescue
 
