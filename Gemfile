@@ -24,6 +24,7 @@ gem 'mini_magick',                  '~> 4.3'
 gem 'whenever',                     :require => false
 gem 'sidekiq'
 gem 'sinatra',                      :require => nil
+gem 'awesome_nested_set'
 
 group :development, :test do
   gem 'byebug',                     '8.0.0'

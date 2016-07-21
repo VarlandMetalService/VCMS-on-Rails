@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615202532) do
+ActiveRecord::Schema.define(version: 20160617185153) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -31,6 +31,44 @@ ActiveRecord::Schema.define(version: 20160615202532) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "file",            limit: 255
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "parent_id",      limit: 4
+    t.integer  "lft",            limit: 4,               null: false
+    t.integer  "rgt",            limit: 4,               null: false
+    t.integer  "depth",          limit: 4,   default: 0, null: false
+    t.integer  "children_count", limit: 4,   default: 0, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "categories", ["lft"], name: "index_categories_on_lft", using: :btree
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+  add_index "categories", ["rgt"], name: "index_categories_on_rgt", using: :btree
+
+  create_table "categories_documents", id: false, force: :cascade do |t|
+    t.integer "document_id", limit: 4
+    t.integer "category_id", limit: 4
+  end
+
+  add_index "categories_documents", ["category_id"], name: "index_categories_documents_on_category_id", using: :btree
+  add_index "categories_documents", ["document_id"], name: "index_categories_documents_on_document_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "added_by",            limit: 4
+    t.string   "name",                limit: 255
+    t.datetime "document_updated_at"
+    t.boolean  "is_valid"
+    t.string   "content_type",        limit: 255
+    t.string   "file",                limit: 255
+    t.string   "google_url",          limit: 255
+    t.string   "google_id",           limit: 255
+    t.text     "google_contents",     limit: 65535
+    t.datetime "google_updated_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "employee_notes", force: :cascade do |t|

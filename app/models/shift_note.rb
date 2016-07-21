@@ -37,7 +37,7 @@ class ShiftNote < ActiveRecord::Base
             allow_nil: true,
             allow_blank: true
   validates :note_type,
-            inclusion: { in: %w(Lab Maintenance IT Plating), message: "%{value} is not a valid type" },
+            inclusion: { in: %w(Lab Maintenance IT Plating QC Shipping), message: "%{value} is not a valid type" },
             allow_nil: true,
             allow_blank: true
   validates :notes,
@@ -69,6 +69,10 @@ class ShiftNote < ActiveRecord::Base
         DailyShiftNotesMailer.delay.specific_note_email(self.id, 'lab')
       when 'Maintenance'
         DailyShiftNotesMailer.delay.specific_note_email(self.id, 'maintenance')
+      when 'QC'
+        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'qc')
+      when 'Shipping'
+        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'shipping')
       else
         return
     end
@@ -123,7 +127,9 @@ class ShiftNote < ActiveRecord::Base
       ['IT', 'IT'],
       ['Lab', 'Lab'],
       ['Maintenance', 'Maintenance'],
-      ['Plating', 'Plating']
+      ['Plating', 'Plating'],
+      ['QC', 'QC'],
+      ['Shipping', 'Shipping']
     ]
   end
 

@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
 protected
 
+  def check_permission(right)
+    @access_level ||= current_user.permissions.find_by_permission right
+  end
+
   def require_permission(right, level)
     @access_level ||= current_user.permissions.find_by_permission right
     if @access_level.nil? || @access_level.access_level < level

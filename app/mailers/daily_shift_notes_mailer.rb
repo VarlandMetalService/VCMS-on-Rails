@@ -21,6 +21,10 @@ class DailyShiftNotesMailer < ApplicationMailer
         recipient = 'Lab <lab@varland.com>'
       when 'maintenance'
         recipient = 'Maintenance <maint@varland.com>'
+      when 'qc'
+        recipient = 'QC <qcshiftnotes@varland.com>'
+      when 'shipping'
+        recipient = 'Shipping <shippingshiftnotes@varland.com>'
       else
         return
     end

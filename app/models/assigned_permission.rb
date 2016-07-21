@@ -50,6 +50,11 @@ class AssignedPermission < ActiveRecord::Base
           ['No Access', '0'],
           ['Access', '3']
         ]
+      when 7      # Admin/Non-Admin Access
+        [
+          ['View Only', '0'],
+          ['Admin', '3']
+        ]
       else
         [
           ['No Access', '0'],
