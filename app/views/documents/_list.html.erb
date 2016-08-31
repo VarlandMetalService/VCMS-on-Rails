@@ -16,7 +16,7 @@
       <% documents.each do |d| -%>
         <tr>
           <td>
-            <%= content_type_icon d.content_type %> <%= link_to d.name, d %>
+            <%= content_type_icon d.content_type %> <%= link_to d.name, d, :target => '_blank' %>
             <!--
             <small>
               <% d.categories.each do |c| -%>
