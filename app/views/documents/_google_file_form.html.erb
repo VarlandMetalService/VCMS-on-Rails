@@ -1,0 +1,55 @@
+<div class="well">
+  <%= form_for @google_document, :html => { class: 'google-docs-form' } do |f| %>
+
+    <% if @google_document.errors.any? %>
+      <div class="error_explanation bg-danger text-danger">
+        <p><%= pluralize(@google_document.errors.count, "error") %> prevented this document from being saved:</p>
+        <ul>
+          <% @google_document.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+
+      <div class="col-xs-12">
+
+        <div class="form-group<%= ' has-error' if @google_document.errors[:google_url].any? %>">
+          <%= f.label :google_url, required_field_label('Google Docs URL:'), class: 'control-label' %>
+          <%= f.text_field :google_url, { class: 'form-control', required: 'required' } %>
+        </div>
+
+        <div class="form-group<%= ' has-error' if @google_document.errors[:name].any? %>">
+          <%= f.label :name, required_field_label('File Name:'), class: 'control-label' %>
+          <%= f.text_field :name, { class: 'form-control', readonly: 'readonly', required: 'required' } %>
+          <%= f.hidden_field :content_type, { class: 'form-control' } %>
+          <%= f.hidden_field :google_id, { class: 'form-control' } %>
+          <%= f.hidden_field :google_contents, { class: 'form-control' } %>
+          <%= f.hidden_field :google_updated_at, { class: 'form-control' } %>
+          <%= f.hidden_field :is_valid, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group<%= ' has-error' if @google_document.errors[:categories].any? %>">
+          <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
+          <%= f.select :category_ids, nested_set_options(Category, @google_document) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: Category.count, required: 'required' } %>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-12">
+
+        <button type="submit" name="commit" class="btn btn-primary" disabled="disabled">Add Document</button>
+        <%= link_to 'Cancel', documents_path, class: 'btn btn-link' %>
+
+      </div>
+
+    </div>
+
+  <% end %>
+</div>

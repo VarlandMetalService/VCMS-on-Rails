@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   self.per_page = 50
 
   # Associations.
+  has_many      :documents,
+                foreign_key: 'added_by'
   has_many      :employee_notes,
                 class_name: 'EmployeeNote',
                 foreign_key: 'employee'

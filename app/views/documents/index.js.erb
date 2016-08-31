@@ -1,0 +1,7 @@
+<% js = escape_javascript(
+  render(
+    :partial => 'documents/list',
+    :locals => { :documents => @documents, current_user: @current_user, :access_level => @access_level.access_level }
+  )
+) %>
+$('#results').html("<%= js %>");

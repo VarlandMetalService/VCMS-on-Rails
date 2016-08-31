@@ -13,3 +13,9 @@ en:
       shift_note:
         one: Shift Note
         other: Shift Notes
+      document:
+        one: Document
+        other: Documents
+      opto_message:
+        one: Opto Message
+        other: Opto Messages

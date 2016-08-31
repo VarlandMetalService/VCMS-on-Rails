@@ -1,0 +1,65 @@
+<% provide(:title, @document.name) %>
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <div class="well well-sm">
+      <strong class="pull-left">Documents</strong>
+
+      <% if @access_level.access_level == 3 -%>
+        <strong class="text-danger text-uppercase pull-right">
+          Admin Mode
+        </strong>
+      <% end %>
+
+      <div class="clearfix"><!----></div>
+
+    </div>
+
+  </div>
+
+  <div class="col-xs-12">
+
+    <div class="row">
+
+      <div class="col-xs-12">
+        <p><%= link_to 'Back to List', documents_path, :class => 'btn btn-default btn-sm' %></p>
+        <p class="lead"><%= @document.name %></p>
+      </div>
+
+      <% case @document.content_type %>
+      <% when 'video/mp4', 'video/quicktime' %>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+          <div class="embed-responsive embed-responsive-16by9 bottom-spacing">
+            <video class="embed-responsive-item" controls src="<%= @document.file.url %>"></video>
+          </div>
+        </div>
+      <% when 'application/pdf' %>
+        <div class="col-xs-12">
+          <div class="embed-responsive embed-fill-height bottom-spacing">
+            <iframe class="embed-responsive-item" src="<%= @document.file.url %>"></iframe>
+          </div>
+        </div>
+      <% when 'google/document' %>
+        <div class="col-xs-12">
+          <div class="embed-responsive embed-fill-height bottom-spacing">
+            <iframe class="embed-responsive-item" src="https://docs.google.com/document/d/<%= @document.google_id %>/edit?usp=sharing"></iframe>
+          </div>
+        </div>
+      <% when 'google/spreadsheets' %>
+        <div class="col-xs-12">
+          <div class="embed-responsive embed-fill-height bottom-spacing">
+            <iframe class="embed-responsive-item" src="https://docs.google.com/spreadsheets/d/<%= @document.google_id %>/edit?usp=sharing"></iframe>
+          </div>
+        </div>
+      <% when 'image/png', 'image/jpg', 'image/gif', 'image/tiff', 'image/jpeg' %>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+          <img class="img-responsive" src="<%= @document.file.url %>" />
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

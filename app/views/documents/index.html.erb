@@ -1,0 +1,108 @@
+<% provide(:title, 'Documents') %>
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <div class="well well-sm">
+      <strong class="pull-left">Documents</strong>
+
+      <% if @access_level.access_level == 3 -%>
+        <strong class="text-danger text-uppercase pull-right">
+          Admin Mode
+        </strong>
+      <% end %>
+
+      <div class="clearfix"><!----></div>
+
+    </div>
+
+  </div>
+
+  <div class="col-xs-12">
+
+    <% if @access_level.access_level == 3 -%>
+      <div class="row">
+        <div class="col-xs-12">
+
+          <p>
+            <button class="btn btn-success btn-sm" type="button" data-toggle="collapse" data-target="#adminOptions" aria-expanded="false" aria-controls="adminOptions">
+              Options
+            </button>
+          </p>
+          <div class="collapse row" id="adminOptions">
+            <div class="col-xs-12 col-sm-4">
+              <h5>Add New Folder</h5>
+              <%= render 'category_form' %>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <h5>Upload New File</h5>
+              <%= render 'upload_file_form' %>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <h5>Add File from Google Docs</h5>
+              <%= render 'google_file_form' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4 col-md-3">
+
+        <%= form_for_filterrific @filterrific, { html: { class: 'bg-warning filter_form hidden-print' } } do |f| %>
+
+          <div class="row">
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= f.label :search_query, 'Search:' %>
+                <%= f.text_field :search_query, class: 'form-control filterrific-periodically-observed' %>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= f.label :sorted_by, 'Sorted By:' %>
+                <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { }, { class: 'form-control' } %>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= f.label :with_category, 'Folder:' %>
+                <%= f.select :with_category, nested_set_options(Category, @category) {|i| "#{'&ndash;' * i.level} #{i.name} (#{i.documents.size})".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: Category.count } %>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-xs-12">
+
+              <%= render_filterrific_spinner %>
+
+              <%= link_to 'Reset Filters', reset_filterrific_url, class: 'btn btn-xs btn-warning pull-right' %>
+              <div class="clearfix"><!----></div>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-9">
+
+        <div id="results"><%= render partial: 'documents/list', locals: { documents: @documents, current_user: @current_user, access_level: @access_level.access_level } %></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

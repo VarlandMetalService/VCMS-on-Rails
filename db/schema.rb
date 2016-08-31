@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617185153) do
+ActiveRecord::Schema.define(version: 20160810193035) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -87,6 +87,25 @@ ActiveRecord::Schema.define(version: 20160617185153) do
 
   add_index "employee_notes", ["employee"], name: "fk_rails_a688637a0d", using: :btree
   add_index "employee_notes", ["entered_by"], name: "fk_rails_60f15ac792", using: :btree
+
+  create_table "opto_messages", force: :cascade do |t|
+    t.string   "message_name", limit: 255
+    t.datetime "message_at"
+    t.integer  "department",   limit: 4
+    t.integer  "lane",         limit: 4
+    t.integer  "station",      limit: 4
+    t.integer  "shop_order",   limit: 4
+    t.integer  "load",         limit: 4
+    t.integer  "barrel",       limit: 4
+    t.string   "customer",     limit: 255
+    t.text     "message",      limit: 65535
+    t.string   "hash",         limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.text     "raw_data",     limit: 65535
+  end
+
+  add_index "opto_messages", ["hash"], name: "index_opto_messages_on_hash", unique: true, using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.string  "permission",  limit: 255

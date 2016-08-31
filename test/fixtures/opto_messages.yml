@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message_name: MyText
+  message_at: 2016-08-10 12:11:02
+  department: 
+  lane: 
+  station: 
+  shop_order: 
+  load: 
+  barrel: 
+  customer: MyText
+  message: MyText
+  hash: MyText
+
+two:
+  message_name: MyText
+  message_at: 2016-08-10 12:11:02
+  department: 
+  lane: 
+  station: 
+  shop_order: 
+  load: 
+  barrel: 
+  customer: MyText
+  message: MyText
+  hash: MyText
