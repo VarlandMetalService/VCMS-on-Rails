@@ -17,7 +17,7 @@ class CreateOptoMessages < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :opto_messages, :hash, unique: true
+    add_index :opto_messages, :hashed_data, unique: true
 
   end
 
