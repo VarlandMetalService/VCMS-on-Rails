@@ -17,11 +17,12 @@
         <tr>
           <td>
             <%= content_type_icon d.content_type %> <%= link_to d.name, d, :target => '_blank' %>
-            <small>
+            <small class="pull-right">
               <% d.categories.each do |c| -%>
                 <span class="label label-info"><%= c.name %></span>
               <% end %>
             </small>
+            <div class="clearfix"><!----></div>
           </td>
           <td class="text-center"><%= d.user.full_name %></td>
           <td class="text-center"><%= d.document_updated_at.strftime '%m/%d/%y' %></td>
