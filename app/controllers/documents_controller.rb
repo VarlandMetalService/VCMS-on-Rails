@@ -22,6 +22,8 @@ class DocumentsController < ApplicationController
       @upload_document = Document.new
       @google_document = Document.new
 
+      @all_categories = Category.top_level
+
     rescue
 
       redirect_to(reset_filterrific_url) and return

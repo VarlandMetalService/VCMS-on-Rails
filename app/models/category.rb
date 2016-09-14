@@ -14,4 +14,7 @@ class Category < ActiveRecord::Base
             presence: true,
             uniqueness: { scope: :parent_id }
 
+  # Scopes.
+  scope :top_level, -> { where(parent_id: nil) }
+
 end
