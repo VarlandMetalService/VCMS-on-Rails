@@ -24,6 +24,7 @@ class OptoMessage < ActiveRecord::Base
   )
 
   # Scopes.
+  default_scope { limit(5000) }
   scope :sorted_by, ->(sort_option) {
     order sort_option
   }
