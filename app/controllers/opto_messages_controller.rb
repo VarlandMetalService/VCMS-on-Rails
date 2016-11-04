@@ -31,7 +31,7 @@ class OptoMessagesController < ApplicationController
 private
 
   def check_permission
-    require_permission 'shift_notes', 2
+    require_permission 'opto_messages', 3
   end
 
 end
