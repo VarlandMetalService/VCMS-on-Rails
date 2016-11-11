@@ -26,6 +26,11 @@
 
           <p>
             <%= link_to 'Back to List', documents_path, class: 'btn btn-sm btn-default'  %>
+            <% if @document.google_url.nil? %>
+              <%= link_to 'Full Screen', @document.file.url, class: 'btn btn-sm btn-primary', target: '_blank'  %>
+            <% else %>
+              <%= link_to 'Full Screen', @document.google_url, class: 'btn btn-sm btn-primary', target: '_blank'  %>
+            <% end %>
             <button class="btn btn-success btn-sm" type="button" data-toggle="collapse" data-target="#adminOptions" aria-expanded="false" aria-controls="adminOptions">
               Options
             </button>
