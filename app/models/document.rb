@@ -38,7 +38,9 @@ class Document < ActiveRecord::Base
 
   before_save :set_doc_update
   def set_doc_update
-    self.document_updated_at = Time.new
+    if self.document_updated_at.nil?
+      self.document_updated_at = Time.new
+    end
   end
   def lookup_google_info(email=false)
     return if self.google_url.nil?
