@@ -4,6 +4,7 @@ class DocumentsController < ApplicationController
 
   before_action :set_document, only: [:edit, :update, :destroy, :show]
   before_action :check_permission
+  skip_before_filter :require_login
 
   def index
 
