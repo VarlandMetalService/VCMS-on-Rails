@@ -61,6 +61,9 @@ class DocumentsController < ApplicationController
 
   def update
     if @document.update document_params
+      categories = params[:document][:category_ids].reject!(&:empty?)
+      @document.categories = Category.find(categories) if categories
+      @document.save
       redirect_to @document, notice: "Successfully updated #{@document.name}."
     else
       render :show
