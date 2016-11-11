@@ -33,7 +33,7 @@ module DocumentsHelper
     end
     if cat.documents.length > 0
       item += "<div class=\"list-group collapse cat#{cat.id}\">"
-      cat.documents.each do |doc|
+      cat.documents.order(name: :desc).each do |doc|
         extra_info = ' <small class="text-muted">' + doc.document_updated_at.strftime('%m/%d/%y') + '</small>'
         item += link_to(content_type_icon(doc.content_type) + ' ' + doc.name + extra_info.html_safe, doc, :target => '_blank', :class => 'list-group-item')
       end
