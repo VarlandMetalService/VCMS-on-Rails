@@ -3,8 +3,8 @@ require 'rest-client'
 class DocumentsController < ApplicationController
 
   before_action :set_document, only: [:edit, :update, :destroy, :show]
-  before_action :check_permission
-  # skip_before_filter :require_login
+  before_action :check_user_permission
+  skip_before_filter :require_login
 
   def index
 
@@ -110,7 +110,7 @@ class DocumentsController < ApplicationController
 
 private
 
-  def check_permission
+  def check_user_permission
     check_permission 'documents'
   end
 
