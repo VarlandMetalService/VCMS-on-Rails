@@ -29,9 +29,12 @@
               Options
             </button>
           </p>
-          <div class="collapse row" id="adminOptions">
+          <div class="collapse in row" id="adminOptions">
             <div class="col-xs-12 col-sm-6">
               <h5>Delete Document</h5>
+              <div class="well">
+                <%= link_to 'Delete', @document, method: :delete, class: 'btn btn-block btn-danger', data: { confirm: 'Are you sure you want to delete this document?' }  %>
+              </div>
             </div>
             <div class="col-xs-12 col-sm-6">
               <h5>Update Document</h5>
