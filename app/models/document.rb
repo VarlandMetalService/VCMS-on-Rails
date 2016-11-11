@@ -32,7 +32,9 @@ class Document < ActiveRecord::Base
     available_filters: [
       :sorted_by,
       :search_query,
-      :with_category
+      :with_category,
+      :with_date_gte,
+      :with_date_lte
     ]
   )
 
@@ -72,6 +74,12 @@ class Document < ActiveRecord::Base
   scope :with_category, ->(values) {
     return if values == [""]
     joins(:categories).where(categories: { id: values })
+  }
+  scope :with_date_gte, ->(value) {
+    where 'document_updated_at >= ?', value
+  }
+  scope :with_date_lte, ->(value) {
+    where 'document_updated_at <= ?', value
   }
 
   # Select options for sorted by.
