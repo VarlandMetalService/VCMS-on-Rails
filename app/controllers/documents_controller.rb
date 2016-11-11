@@ -115,7 +115,7 @@ private
   end
 
   def document_params
-    params.require(:document).permit(:name, :content_type, :file, :_destroy, :google_url, :google_id, :google_contents, :google_updated_at, :category_ids)
+    params.require(:document).permit(:name, :document_updated_at, :content_type, :file, :_destroy, :google_url, :google_id, :google_contents, :google_updated_at, :category_ids)
   end
 
 end
