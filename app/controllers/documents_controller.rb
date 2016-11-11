@@ -110,7 +110,7 @@ class DocumentsController < ApplicationController
 private
 
   def check_permission
-    require_permission 'documents', 0
+    check_permission 'documents'
   end
 
   def set_document
