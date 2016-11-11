@@ -61,9 +61,9 @@ class DocumentsController < ApplicationController
 
   def update
     if @document.update document_params
-      redirect_to documents_url, notice: "Successfully updated #{@document.name}."
+      redirect_to @document, notice: "Successfully updated #{@document.name}."
     else
-      render :edit
+      render :show
     end
   end
 

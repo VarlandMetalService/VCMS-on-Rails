@@ -51,4 +51,6 @@ Rails.application.configure do
 
   routes.default_url_options[:host]='http://192.168.82.77'
 
+  config.web_console.whitelisted_ips = '192.168.82.77'
+
 end
