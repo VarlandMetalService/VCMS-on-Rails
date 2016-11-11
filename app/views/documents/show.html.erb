@@ -57,20 +57,22 @@
 
                     <div class="col-xs-12">
 
-                      <div class="form-group<%= ' has-error' if @document.errors[:name].any? %>">
-                        <%= f.label :name, 'Name:', class: 'control-label' %>
-                        <%= f.text_field :name, { class: 'form-control' } %>
-                      </div>
+                      <% if @document.google_url.nil? %>
+                        <div class="form-group<%= ' has-error' if @document.errors[:name].any? %>">
+                          <%= f.label :name, 'Name:', class: 'control-label' %>
+                          <%= f.text_field :name, { class: 'form-control' } %>
+                        </div>
 
-                      <div class="form-group<%= ' has-error' if @document.errors[:document_updated_at].any? %>">
-                        <%= f.label :document_updated_at, 'Date:', class: 'control-label' %>
-                        <%= f.datetime_local_field :document_updated_at, { class: 'form-control' } %>
-                      </div>
+                        <div class="form-group<%= ' has-error' if @document.errors[:document_updated_at].any? %>">
+                          <%= f.label :document_updated_at, 'Date:', class: 'control-label' %>
+                          <%= f.datetime_local_field :document_updated_at, { class: 'form-control' } %>
+                        </div>
 
-                      <div class="form-group<%= ' has-error' if @document.errors[:file].any? %>">
-                        <%= f.label :file, 'File:', class: 'control-label' %>
-                        <%= f.file_field :file, { class: 'form-control' } %>
-                      </div>
+                        <div class="form-group<%= ' has-error' if @document.errors[:file].any? %>">
+                          <%= f.label :file, 'File:', class: 'control-label' %>
+                          <%= f.file_field :file, { class: 'form-control' } %>
+                        </div>
+                      <% end %>
 
                       <div class="form-group<%= ' has-error' if @document.errors[:categories].any? %>">
                         <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
