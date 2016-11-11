@@ -23,6 +23,7 @@ class DocumentsController < ApplicationController
       @google_document = Document.new
 
       @all_categories = Category.top_level
+      @most_recent = Document.find(:all, :order => 'document_updated_at DESC', :limit => 5)
 
     rescue
 
