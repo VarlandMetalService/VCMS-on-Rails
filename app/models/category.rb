@@ -7,7 +7,8 @@ class Category < ActiveRecord::Base
   acts_as_nested_set
 
   # Associations.
-  has_and_belongs_to_many   :documents
+  has_and_belongs_to_many   :documents,
+                            :order => 'name'
 
   # Validations.
   validates :name,
