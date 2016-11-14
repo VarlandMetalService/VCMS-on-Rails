@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 
   # Default sorting.
-  default_scope { order('parent_id ASC, name ASC') }
+  default_scope { order('parent_id ASC, position ASC, name ASC') }
 
   # Nested set functionality.
   acts_as_nested_set
