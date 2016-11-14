@@ -31,6 +31,11 @@
           <%= f.hidden_field :is_valid, { class: 'form-control' } %>
         </div>
 
+        <div class="form-group<%= ' has-error' if @google_document.errors[:document_updated_on].any? %>">
+          <%= f.label :document_updated_on, 'Date:', class: 'control-label' %>
+          <%= f.date_field :document_updated_on, { class: 'form-control' } %>
+        </div>
+
         <div class="form-group<%= ' has-error' if @google_document.errors[:categories].any? %>">
           <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
           <%= f.select :category_ids, nested_set_options(Category, @google_document) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: Category.count, required: 'required' } %>
