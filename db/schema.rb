@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810193035) do
+ActiveRecord::Schema.define(version: 20161114144426) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20160810193035) do
   create_table "documents", force: :cascade do |t|
     t.integer  "added_by",            limit: 4
     t.string   "name",                limit: 255
-    t.datetime "document_updated_at"
     t.boolean  "is_valid"
     t.string   "content_type",        limit: 255
     t.string   "file",                limit: 255
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160810193035) do
     t.datetime "google_updated_at"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.date     "document_updated_on"
   end
 
   create_table "employee_notes", force: :cascade do |t|
@@ -99,13 +99,13 @@ ActiveRecord::Schema.define(version: 20160810193035) do
     t.integer  "barrel",       limit: 4
     t.string   "customer",     limit: 255
     t.text     "message",      limit: 65535
-    t.string   "hash",         limit: 255
+    t.string   "hashed_data",  limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.text     "raw_data",     limit: 65535
   end
 
-  add_index "opto_messages", ["hash"], name: "index_opto_messages_on_hash", unique: true, using: :btree
+  add_index "opto_messages", ["hashed_data"], name: "index_opto_messages_on_hash", unique: true, using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.string  "permission",  limit: 255

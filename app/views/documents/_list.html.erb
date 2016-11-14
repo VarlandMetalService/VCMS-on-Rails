@@ -5,7 +5,7 @@
   <div class="list-group">
     <% documents.each do |d| -%>
       <%
-        extra_info = ' <small class="text-muted">' + d.document_updated_at.strftime('%m/%d/%y') + '</small>'
+        extra_info = ' <small class="text-muted">' + d.document_updated_on.strftime('%m/%d/%y') + '</small>'
         extra_info += '<small class="pull-right">'
         d.categories.each do |c|
           extra_info += "&nbsp;<span class=\"label label-info\">#{c.name}</span>"

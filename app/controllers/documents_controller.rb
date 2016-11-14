@@ -24,7 +24,7 @@ class DocumentsController < ApplicationController
       @google_document = Document.new
 
       @all_categories = Category.top_level
-      @most_recent = Document.order(document_updated_at: :desc).limit(5)
+      @most_recent = Document.order(document_updated_on: :desc).limit(5)
 
     rescue
 
@@ -119,7 +119,7 @@ private
   end
 
   def document_params
-    params.require(:document).permit(:name, :document_updated_at, :content_type, :file, :_destroy, :google_url, :google_id, :google_contents, :google_updated_at, :category_ids)
+    params.require(:document).permit(:name, :document_updated_on, :content_type, :file, :_destroy, :google_url, :google_id, :google_contents, :google_updated_at, :category_ids)
   end
 
 end

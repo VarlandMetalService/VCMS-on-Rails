@@ -28,7 +28,7 @@ class Document < ActiveRecord::Base
 
   # Filtering.
   filterrific(
-    default_filter_params: { sorted_by: 'document_updated_at DESC' },
+    default_filter_params: { sorted_by: 'document_updated_on DESC' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -40,8 +40,8 @@ class Document < ActiveRecord::Base
 
   before_save :set_doc_update
   def set_doc_update
-    if self.document_updated_at.nil?
-      self.document_updated_at = Time.new
+    if self.document_updated_on.nil?
+      self.document_updated_on = Date.today
     end
   end
   def lookup_google_info(email=false)
@@ -76,17 +76,17 @@ class Document < ActiveRecord::Base
     joins(:categories).where(categories: { id: values })
   }
   scope :with_date_gte, ->(value) {
-    where 'document_updated_at >= ?', value
+    where 'document_updated_on >= ?', value
   }
   scope :with_date_lte, ->(value) {
-    where 'document_updated_at <= ?', value
+    where 'document_updated_on <= ?', value
   }
 
   # Select options for sorted by.
   def self.options_for_sorted_by
     [
-      ['Date (newest first)', 'document_updated_at DESC'],
-      ['Date (oldest first)', 'document_updated_at']
+      ['Date (newest first)', 'document_updated_on DESC'],
+      ['Date (oldest first)', 'document_updated_on']
     ]
   end
 
