@@ -18,7 +18,7 @@ private
   end
 
   def category_params
-    params.require(:category).permit(:name, :parent_id)
+    params.require(:category).permit(:name, :parent_id, :google_drive_folder)
   end
 
 end

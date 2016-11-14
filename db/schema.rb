@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114165334) do
+ActiveRecord::Schema.define(version: 20161114194614) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -34,15 +34,16 @@ ActiveRecord::Schema.define(version: 20161114165334) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.integer  "parent_id",      limit: 4
-    t.integer  "lft",            limit: 4,               null: false
-    t.integer  "rgt",            limit: 4,               null: false
-    t.integer  "depth",          limit: 4,   default: 0, null: false
-    t.integer  "children_count", limit: 4,   default: 0, null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "position",       limit: 4
+    t.string   "name",                limit: 255
+    t.integer  "parent_id",           limit: 4
+    t.integer  "lft",                 limit: 4,               null: false
+    t.integer  "rgt",                 limit: 4,               null: false
+    t.integer  "depth",               limit: 4,   default: 0, null: false
+    t.integer  "children_count",      limit: 4,   default: 0, null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "position",            limit: 4
+    t.string   "google_drive_folder", limit: 255
   end
 
   add_index "categories", ["lft"], name: "index_categories_on_lft", using: :btree

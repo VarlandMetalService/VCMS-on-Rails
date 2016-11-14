@@ -2,6 +2,9 @@ require 'rest-client'
 
 class Document < ActiveRecord::Base
 
+  # Default scoping.
+  default_scope { where 'is_valid IS TRUE' }
+
   # Pagination.
   self.per_page = 100
 
