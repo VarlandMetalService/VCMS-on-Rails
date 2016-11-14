@@ -44,7 +44,7 @@ class Document < ActiveRecord::Base
       self.document_updated_on = Date.today
     end
   end
-  def lookup_google_info(email=false)
+  def lookup_google_info
     return if self.google_url.nil?
     begin
       response = RestClient.get 'https://script.google.com/macros/s/AKfycbxXLu_t6lEyYUpLQ3s5tcfQz-691nGEuOV-eK7tce5uTmcbToM/exec', params: { url: self.google_url }, accept: :json
@@ -62,6 +62,18 @@ class Document < ActiveRecord::Base
     rescue => e
       self.is_valid = false
     end
+  end
+  def update_google_info
+    return if self.google_url.nil?
+    type_pre = self.content_type
+    id_pre = self.google_id
+    contents_pre = self.google_contents
+    name_pre = self.name
+    self.lookup_google_info
+    unless self.content_type == type_pre && self.google_id == id_pre && self.google_contents == contents_pre && self.name == name_pre
+      self.document_updated_on = Date.today
+    end
+    self.save!
   end
 
   # Scopes.
