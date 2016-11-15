@@ -16,6 +16,7 @@ var DeptInfo = {
   showEvent: 'shown.bs.collapse',
   hideEvent: 'hidden.bs.collapse',
   contentSelector: '.panel-body, .list-group',
+  preventCollapseSelector: '.panel-heading a',
 
   /**
    * Change height of embeds.
@@ -56,13 +57,17 @@ var DeptInfo = {
       var cookieValue = item.parent().children(DeptInfo.folderContainerSelector).children(DeptInfo.folderTitleSelector).data('target');
       Cookies.remove(cookieValue);
     });
-
     $(DeptInfo.folderTitleSelector).each(function() {
       var item = $(this);
       var target = item.data('target');
       if (Cookies.get(target) !== undefined) {
         $(target).collapse('show');
       }
+    });
+
+    // Stop propagation when clicking folder links.
+    $(document).on('click', DeptInfo.preventCollapseSelector, function(e) {
+      e.stopPropagation();
     });
 
     // Set interval for iframe sizing.
