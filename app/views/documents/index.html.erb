@@ -127,7 +127,7 @@
         </div>
 
         <% @all_categories.each do |c| -%>
-          <%= category_list c %>
+          <%= category_list c, @access_level %>
         <% end %>
 
       </div>

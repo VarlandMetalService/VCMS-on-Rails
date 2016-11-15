@@ -17,17 +17,25 @@ module DocumentsHelper
     end
   end
 
-  def category_list cat
+  def category_list cat, access_level
 
     if cat.children.length == 0 && cat.documents.length == 0
       return ''.html_safe
     end
 
-    item = "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\" data-toggle=\"collapse\" data-target=\".cat#{cat.id}\" style=\"cursor: pointer;\"><i class=\"fa fa-fw fa-folder\" aria-hidden=\"true\"></i> #{cat.name}</h3></div>"
+    buttons = ''
+    if access_level && access_level.access_level == 3
+      buttons = '<span class="pull-right">'
+      buttons += link_to('<i class="fa fa-fw fa-pencil"></i>'.html_safe, edit_category_path(cat))
+      buttons += link_to('<i class="fa fa-fw fa-arrow-up"></i>'.html_safe, move_up_categories_path(id: cat), method: :post)
+      buttons += link_to('<i class="fa fa-fw fa-arrow-down"></i>'.html_safe, move_down_categories_path(id: cat), method: :post)
+      buttons += '</span>'
+    end
+    item = "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\" data-toggle=\"collapse\" data-target=\".cat#{cat.id}\" style=\"cursor: pointer;\"><i class=\"fa fa-fw fa-folder\" aria-hidden=\"true\"></i> #{cat.name}#{buttons}</h3></div>"
     if cat.children.length > 0
       item += "<div class=\"panel-body collapse cat#{cat.id}\">"
       cat.children.each do |child|
-        item += category_list(child)
+        item += category_list(child, access_level)
       end
       item += "</div>"
     end

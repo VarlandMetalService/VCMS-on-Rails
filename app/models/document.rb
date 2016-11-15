@@ -104,6 +104,9 @@ class Document < ActiveRecord::Base
   scope :with_date_lte, ->(value) {
     where 'document_updated_on <= ?', value
   }
+  scope :not_excluded, ->() {
+    where 'exclude_from_newest IS FALSE'
+  }
 
   # Select options for sorted by.
   def self.options_for_sorted_by

@@ -16,7 +16,12 @@ Rails.application.routes.draw do
       get :get_google_meta
     end
   end
-  resources :categories
+  resources :categories do
+    collection do
+      post :move_up
+      post :move_down
+    end
+  end
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

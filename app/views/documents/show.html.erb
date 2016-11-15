@@ -42,13 +42,13 @@
         <div class="col-xs-12">
 
           <div class="collapse row" id="adminOptions">
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">
               <h5>Delete Document</h5>
               <div class="well">
                 <%= link_to 'Delete', @document, method: :delete, class: 'btn btn-block btn-danger', data: { confirm: 'Are you sure you want to delete this document?' }  %>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">
               <h5>Update Document</h5>
               <div class="well">
                 <%= form_for @document do |f| %>
@@ -71,6 +71,11 @@
                       <div class="form-group<%= ' has-error' if @document.errors[:document_updated_on].any? %>">
                         <%= f.label :document_updated_on, 'Date:', class: 'control-label' %>
                         <%= f.date_field :document_updated_on, { class: 'form-control' } %>
+                        <% if @document.google_url.nil? %>
+                          <span class="help-block"><small><em>You may update the document's date to change sorting as needed.</em></small></span>
+                        <% else %>
+                          <span class="help-block"><small><em>You may update the document's date to change sorting as needed. This date will automatically update as the contents of the Google Document change.</em></small></span>
+                        <% end %>
                       </div>
 
                       <% if @document.google_url.nil? %>
@@ -82,12 +87,23 @@
                         <div class="form-group<%= ' has-error' if @document.errors[:file].any? %>">
                           <%= f.label :file, 'File:', class: 'control-label' %>
                           <%= f.file_field :file, { class: 'form-control' } %>
+                          <span class="help-block"><small><em>Use this field to replace the file without changing the name, date, or folders.</em></small></span>
                         </div>
                       <% end %>
 
+                      <div class="form-group<%= ' has-error' if @document.errors[:exclude_from_newest].any? %>">
+                        <div class="checkbox">
+                          <label>
+                            <%= f.check_box :exclude_from_newest %>
+                            Exclude from list of newest documents
+                          </label>
+                        </div>
+                      </div>
+
                       <div class="form-group<%= ' has-error' if @document.errors[:categories].any? %>">
                         <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
-                        <%= f.select :category_ids, nested_set_options(Category, @category) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: Category.count, required: 'required' } %>
+                        <%= f.select :category_ids, nested_set_options(Category, @category) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: 10, required: 'required' } %>
+                        <span class="help-block"><small><em>This document may appear in as many folders as you would like. You must choose at least one folder. Use Control/Command-Click to select/deselect folders.</em></small></span>
                       </div>
 
                     </div>

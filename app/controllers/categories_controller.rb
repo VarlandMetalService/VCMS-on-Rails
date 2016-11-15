@@ -1,6 +1,18 @@
 class CategoriesController < ApplicationController
 
   before_action :check_permission
+  before_action :set_category, only: [:move_up, :move_down, :edit, :update]
+
+  def edit
+  end
+
+  def update
+    if @category.update category_params
+      redirect_to documents_path
+    else
+      render :edit
+    end
+  end
 
   def create
     @category = Category.new category_params
@@ -11,7 +23,21 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def move_up
+    @category.move_up
+    redirect_to documents_url
+  end
+
+  def move_down
+    @category.move_down
+    redirect_to documents_url
+  end
+
 private
+
+  def set_category
+    @category = Category.find params[:id]
+  end
 
   def check_permission
     require_permission 'documents', 3
