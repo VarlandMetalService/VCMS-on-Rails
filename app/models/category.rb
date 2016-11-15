@@ -16,7 +16,7 @@ class Category < ActiveRecord::Base
   before_save :set_position
   def set_position
     if self.position.nil?
-      max = Category.where(parent_id: self.parent_id).maximum(:position)
+      max = Category.where(parent_id: self.parent_id).where.not(position: 9999999).maximum(:position)
       self.position = max.nil? ? 10 : max + 10
     end
   end
