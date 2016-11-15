@@ -24,7 +24,7 @@
         <div class="form-group<%= ' has-error' if @upload_document.errors[:document_updated_on].any? %>">
           <%= f.label :document_updated_on, 'Date:', class: 'control-label' %>
           <%= f.date_field :document_updated_on, { class: 'form-control' } %>
-          <span class="help-block"><small><em>You may specify an update date or leave blank to default to today's date.</em></small></span>
+          <span class="help-block"><small>You may specify an update date or leave blank to default to today's date.</small></span>
         </div>
 
         <div class="form-group<%= ' has-error' if @upload_document.errors[:file].any? %>">
@@ -44,7 +44,7 @@
         <div class="form-group<%= ' has-error' if @upload_document.errors[:categories].any? %>">
           <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
           <%= f.select :category_ids, nested_set_options(Category, @upload_document) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: 10, required: 'required' } %>
-          <span class="help-block"><small><em>This document may appear in as many folders as you would like. You must choose at least one folder. Use Control/Command-Click to select/deselect folders.</em></small></span>
+          <span class="help-block"><small>This document may appear in as many folders as you would like. You must choose at least one folder. Use Control/Command-Click to select/deselect folders.</small></span>
         </div>
 
       </div>

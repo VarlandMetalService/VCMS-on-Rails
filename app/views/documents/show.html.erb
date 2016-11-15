@@ -72,9 +72,9 @@
                         <%= f.label :document_updated_on, 'Date:', class: 'control-label' %>
                         <%= f.date_field :document_updated_on, { class: 'form-control' } %>
                         <% if @document.google_url.nil? %>
-                          <span class="help-block"><small><em>You may update the document's date to change sorting as needed.</em></small></span>
+                          <span class="help-block"><small>You may update the document's date to change sorting as needed.</small></span>
                         <% else %>
-                          <span class="help-block"><small><em>You may update the document's date to change sorting as needed. This date will automatically update as the contents of the Google Document change.</em></small></span>
+                          <span class="help-block"><small>You may update the document's date to change sorting as needed. This date will automatically update as the contents of the Google Document change.</small></span>
                         <% end %>
                       </div>
 
@@ -87,7 +87,7 @@
                         <div class="form-group<%= ' has-error' if @document.errors[:file].any? %>">
                           <%= f.label :file, 'File:', class: 'control-label' %>
                           <%= f.file_field :file, { class: 'form-control' } %>
-                          <span class="help-block"><small><em>Use this field to replace the file without changing the name, date, or folders.</em></small></span>
+                          <span class="help-block"><small>Use this field to replace the file without changing the name, date, or folders.</small></span>
                         </div>
                       <% end %>
 
@@ -103,7 +103,7 @@
                       <div class="form-group<%= ' has-error' if @document.errors[:categories].any? %>">
                         <%= f.label :category_ids, required_field_label('Folder(s):'), class: 'control-label' %>
                         <%= f.select :category_ids, nested_set_options(Category, @category) {|i| "#{'&ndash;' * i.level} #{i.name}".html_safe }, { include_blank: false }, { class: 'form-control', multiple: true, size: 10, required: 'required' } %>
-                        <span class="help-block"><small><em>This document may appear in as many folders as you would like. You must choose at least one folder. Use Control/Command-Click to select/deselect folders.</em></small></span>
+                        <span class="help-block"><small>This document may appear in as many folders as you would like. You must choose at least one folder. Use Control/Command-Click to select/deselect folders.</small></span>
                       </div>
 
                     </div>

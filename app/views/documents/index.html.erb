@@ -77,6 +77,7 @@
               <div class="form-group">
                 <%= f.label :search_query, 'Search:' %>
                 <%= f.text_field :search_query, class: 'form-control filterrific-periodically-observed' %>
+                <span class="help-block"><small>Search results will update as you type. If you enter multiple words, documents containing all words will be returned. If you need to find a specific phrase, enclose the phrase in double quotes. Entering <code>poor adhesion</code> will find documents containing the words <code>poor</code> and <code>adhesion</code>. Entering <code>"poor adhesion"</code> will find documents containing the phrase <code>poor adhesion</code>. You can have multiple double-quoted phrases.</small></span>
               </div>
             </div>
 
