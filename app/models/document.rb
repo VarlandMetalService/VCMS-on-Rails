@@ -4,6 +4,7 @@ class Document < ActiveRecord::Base
 
   # Default scoping.
   default_scope { where 'is_valid IS TRUE' }
+  default_scope { order 'document_updated_on DESC' }
 
   # Pagination.
   self.per_page = 100
