@@ -85,12 +85,13 @@ class Document < ActiveRecord::Base
   }
   scope :search_query, ->(query) {
     return if query.blank?
-    cond_text   = query.split.map{|w| "(documents.name like ? or google_contents like ?)"}.join(' AND ')
+    cond_text = Array.new
     cond_values = Array.new
-    query.split.each{|w|
+    query.split(/\s(?=(?:[^'"]|'[^']*'|"[^"]*")*$)/).select {|s| not s.empty? }.map {|s| s.gsub(/(^ +)|( +$)|(^["']+)|(["']+$)/,'')}.each{|w|
+      cond_text << "(documents.name like ? or google_contents like ?)"
       cond_values << "%#{w}%" << "%#{w}%"
     }
-    where cond_text, *cond_values
+    where cond_text.join(' AND '), *cond_values
   }
   scope :with_category, ->(values) {
     return if values == [""]
