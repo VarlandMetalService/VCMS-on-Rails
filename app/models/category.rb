@@ -12,6 +12,7 @@ class Category < ActiveRecord::Base
 
   # Callbacks.
   after_create :get_google_documents
+  after_create :update_all_positions
 
   before_save :set_position
   def set_position
@@ -39,6 +40,10 @@ class Category < ActiveRecord::Base
     self.position += offset
     self.save!
     Category.update_positions(self.parent_id)
+  end
+
+  def update_all_positions
+    Category.update_positions
   end
 
   def get_google_documents

@@ -42,6 +42,11 @@ class Document < ActiveRecord::Base
     ]
   )
 
+  after_destroy :update_all_positions
+  def update_all_positions
+    Category.update_positions
+  end
+
   before_save :set_doc_update
   def set_doc_update
     if self.document_updated_on.nil?
