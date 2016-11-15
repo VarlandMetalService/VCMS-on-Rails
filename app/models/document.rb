@@ -84,7 +84,13 @@ class Document < ActiveRecord::Base
     order sort_option
   }
   scope :search_query, ->(query) {
-    where 'documents.name like ? or google_contents like ?', "%#{query}%", "%#{query}%"
+    return if query.blank?
+    cond_text   = query.split.map{|w| "(documents.name like ? or google_contents like ?)"}.join(' AND ')
+    cond_values = Array.new
+    query.split.each{|w|
+      cond_values << "%#{w}%" << "%#{w}%"
+    }
+    where cond_text, *cond_values
   }
   scope :with_category, ->(values) {
     return if values == [""]
