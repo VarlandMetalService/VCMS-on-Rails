@@ -1,0 +1,142 @@
+<% provide(:title, 'Thickness Checks') %>
+<div class="row">
+
+  <div class="col-xs-12">
+
+    <div class="well well-sm">
+      <strong class="pull-left">Thickness Checks</strong>
+
+      <% if @access_level.access_level == 3 -%>
+        <strong class="text-danger text-uppercase pull-right">
+          Admin Mode
+        </strong>
+      <% end %>
+
+      <div class="clearfix"><!----></div>
+
+    </div>
+
+  </div>
+
+  <div class="col-xs-12">
+
+    <% if @thickness_blocks.size == 0 -%>
+
+      <p class="text-muted">No thickness checks found.</p>
+
+    <% else -%>
+
+      <%= form_for_filterrific @filterrific, { html: { class: 'bg-warning filter_form hidden-print' } } do |f| %>
+
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_shop_order, 'Shop Order:' %>
+              <%= f.select :with_shop_order, @filterrific.select_options[:shop_order], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_customer, 'Customer:' %>
+              <%= f.select :with_customer, @filterrific.select_options[:customer], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_process, 'Process Code:' %>
+              <%= f.select :with_process, @filterrific.select_options[:process], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_part, 'Part ID:' %>
+              <%= f.select :with_part, @filterrific.select_options[:part], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_sub, 'Sub ID:' %>
+              <%= f.select :with_sub, @filterrific.select_options[:sub], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_directory, 'Directory:' %>
+              <%= f.select :with_directory, @filterrific.select_options[:directory], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_product, 'Product:' %>
+              <%= f.select :with_product, @filterrific.select_options[:product], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_application, 'Application:' %>
+              <%= f.select :with_application, @filterrific.select_options[:application], { include_blank: true }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_date_gte, 'Starting Date:' %>
+              <%= f.date_field :with_date_gte, class: 'form-control'  %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :with_date_lte, 'Ending Date:' %>
+              <%= f.date_field :with_date_lte, class: 'form-control'  %>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <%= f.label :sorted_by, 'Sorted By:' %>
+              <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { }, { class: 'form-control' } %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-xs-12">
+
+            <%= render_filterrific_spinner %>
+
+            <%= link_to 'Reset Filters', reset_filterrific_url, class: 'btn btn-xs btn-warning pull-right' %>
+            <div class="clearfix"><!----></div>
+
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <div id="results"><%= render partial: 'thickness/list', locals: { access_level: @access_level, thickness_blocks: @thickness_blocks } %></div>
+
+    <% end %>
+
+  </div>
+
+</div>

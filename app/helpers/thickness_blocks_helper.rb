@@ -1,0 +1,2 @@
+module ThicknessBlocksHelper
+end

@@ -1,0 +1,8 @@
+<% js = escape_javascript(
+  render(
+    :partial => 'thickness/list',
+    :locals => { :thickness_blocks => @thickness_blocks,
+                 :access_level => @access_level }
+  )
+) %>
+$('#results').html("<%= js %>");

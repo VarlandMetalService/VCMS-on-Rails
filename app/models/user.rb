@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   self.per_page = 50
 
   # Associations.
+  has_many      :thickness_blocks
   has_many      :documents,
                 foreign_key: 'added_by'
   has_many      :employee_notes,

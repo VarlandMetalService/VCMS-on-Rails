@@ -1,0 +1,2 @@
+module ThicknessChecksHelper
+end

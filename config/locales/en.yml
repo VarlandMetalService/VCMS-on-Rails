@@ -19,3 +19,9 @@ en:
       opto_message:
         one: Opto Message
         other: Opto Messages
+      thickness_check:
+        one: Thickness Check
+        other: Thickness Checks
+      thickness_block:
+        one: Block of Thickness Checks
+        other: Blocks of Thickness Checks

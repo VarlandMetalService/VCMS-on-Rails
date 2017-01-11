@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115084257) do
+ActiveRecord::Schema.define(version: 20170111171008) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -136,6 +136,40 @@ ActiveRecord::Schema.define(version: 20161115084257) do
 
   add_index "shift_notes", ["entered_by"], name: "fk_rails_8c4d173e86", using: :btree
 
+  create_table "thickness_blocks", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.datetime "block_at"
+    t.integer  "shop_order",  limit: 4
+    t.integer  "load",        limit: 4
+    t.integer  "block",       limit: 4
+    t.string   "directory",   limit: 255
+    t.string   "product",     limit: 255
+    t.string   "application", limit: 255
+    t.string   "customer",    limit: 255
+    t.string   "process",     limit: 255
+    t.string   "part",        limit: 255
+    t.string   "sub",         limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "thickness_blocks", ["user_id"], name: "fk_rails_00ec76c2ce", using: :btree
+
+  create_table "thickness_checks", force: :cascade do |t|
+    t.integer  "thickness_block_id", limit: 4
+    t.datetime "check_at"
+    t.integer  "check",              limit: 4
+    t.decimal  "thickness",                    precision: 8, scale: 5
+    t.decimal  "alloy_percentage",             precision: 8, scale: 5
+    t.decimal  "x",                            precision: 8, scale: 5
+    t.decimal  "y",                            precision: 8, scale: 5
+    t.decimal  "z",                            precision: 8, scale: 5
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+  end
+
+  add_index "thickness_checks", ["thickness_block_id"], name: "fk_rails_ce3f53f02f", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "username",         limit: 255
     t.integer  "employee_number",  limit: 4
@@ -161,4 +195,6 @@ ActiveRecord::Schema.define(version: 20161115084257) do
   add_foreign_key "employee_notes", "users", column: "employee"
   add_foreign_key "employee_notes", "users", column: "entered_by"
   add_foreign_key "shift_notes", "users", column: "entered_by"
+  add_foreign_key "thickness_blocks", "users"
+  add_foreign_key "thickness_checks", "thickness_blocks"
 end

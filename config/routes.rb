@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :thickness_blocks
+  resources :thickness_checks
   resources :opto_messages
   root                        'vcms#home'
   get     'login'         =>  'sessions#new'
   post    'login'         =>  'sessions#create'
   delete  'logout'        =>  'sessions#destroy'
 
+  resources :thickness
   resources :employee_notes
   resources :shift_notes
   resources :users
