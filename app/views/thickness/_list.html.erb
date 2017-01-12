@@ -50,10 +50,8 @@
               <thead>
                 <tr>
                   <th class="text-center col-xs-3">Check #</th>
-                  <th class="text-center col-xs-<%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '6' : '3' %>">Thickness</th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-center col-xs-3">Alloy %</th>
-                  <% end %>
+                  <th class="text-center col-xs-3">Thickness</th>
+                  <th class="text-center col-xs-3"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : 'Alloy %' %><% end %></th>
                   <th class="text-center hidden-print col-xs-3">
                     Options
                   </th>
@@ -63,15 +61,13 @@
                 <tr class="bg-info text-info basic-stats">
                   <th class="text-center"><%= pluralize(b.thickness_checks.length, 'check') %></th>
                   <th class="text-right"><%= number_with_precision(b.thickness_checks.average(:thickness), :precision => 3) %></th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-right"><%= number_with_precision(b.thickness_checks.average(:alloy_percentage), :precision => 3) %></th>
-                  <% end %>
+                  <th class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(b.thickness_checks.average(:alloy_percentage), :precision => 3) %></th>
                   <th class="hidden-print text-center">
                     <button type="button" class="btn btn-default btn-xs" role="button" data-toggle="collapse" href="#collapse-table-<%= b.id %>" aria-expanded="false" aria-controls="collapse-table-<%= b.id %>"><span aria-hidden="true"><i class="fa fa-plus" aria-hidden="true"></i></span><span class="sr-only">Expand</span></button>
                   </th>
                 </tr>
                 <tr class="bg-info text-info advanced-stats">
-                  <th colspan="<%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? 2 : 3 %>" class="text-center"><%= pluralize(b.thickness_checks.length, 'check') %></th>
+                  <th colspan="3" class="text-center"><%= pluralize(b.thickness_checks.length, 'check') %></th>
                   <th class="hidden-print text-center">
                     <button type="button" class="btn btn-default btn-xs" role="button" data-toggle="collapse" href="#collapse-table-<%= b.id %>" aria-expanded="false" aria-controls="collapse-table-<%= b.id %>"><span aria-hidden="true"><i class="fa fa-plus" aria-hidden="true"></i></span><span class="sr-only">Expand</span></button>
                   </th>
@@ -79,33 +75,25 @@
                 <tr class="bg-info text-info advanced-stats">
                   <th class="text-center">Mean</th>
                   <th class="text-right"><%= number_with_precision(b.thickness_checks.average(:thickness), :precision => 3) %></th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-right"><%= number_with_precision(b.thickness_checks.average(:alloy_percentage), :precision => 3) %></th>
-                  <% end %>
+                  <th class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(b.thickness_checks.average(:alloy_percentage), :precision => 3) %></th>
                   <th class="hidden-print text-center">&nbsp;</th>
                 </tr>
                 <tr class="bg-info text-info advanced-stats">
                   <th class="text-center">Min</th>
                   <th class="text-right"><%= number_with_precision(b.thickness_checks.minimum(:thickness), :precision => 3) %></th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-right"><%= number_with_precision(b.thickness_checks.minimum(:alloy_percentage), :precision => 3) %></th>
-                  <% end %>
+                  <th class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(b.thickness_checks.minimum(:alloy_percentage), :precision => 3) %></th>
                   <th class="hidden-print text-center">&nbsp;</th>
                 </tr>
                 <tr class="bg-info text-info advanced-stats">
                   <th class="text-center">Max</th>
                   <th class="text-right"><%= number_with_precision(b.thickness_checks.maximum(:thickness), :precision => 3) %></th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-right"><%= number_with_precision(b.thickness_checks.maximum(:alloy_percentage), :precision => 3) %></th>
-                  <% end %>
+                  <th class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(b.thickness_checks.maximum(:alloy_percentage), :precision => 3) %></th>
                   <th class="hidden-print text-center">&nbsp;</th>
                 </tr>
                 <tr class="bg-info text-info advanced-stats">
                   <th class="text-center">Std Dev</th>
                   <th class="text-right"><%= number_with_precision(b.standard_deviation_thickness, :precision => 3) %></th>
-                  <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                    <th class="text-right"><%= number_with_precision(b.standard_deviation_alloy_percentage, :precision => 3) %></th>
-                  <% end %>
+                  <th class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(b.standard_deviation_alloy_percentage, :precision => 3) %></th>
                   <th class="hidden-print text-center">&nbsp;</th>
                 </tr>
               </tfoot>
@@ -114,9 +102,7 @@
                   <tr>
                     <td><%= i + 1 %></td>
                     <td class="text-right"><%= number_with_precision(t.thickness, :precision => 3) %></td>
-                    <% unless b.thickness_checks.maximum(:alloy_percentage) == 0 %>
-                      <td class="text-right"><%= number_with_precision(t.alloy_percentage, :precision => 3) %></td>
-                    <% end %>
+                    <td class="text-right"><%= b.thickness_checks.maximum(:alloy_percentage) == 0 ? '&nbsp;' : number_with_precision(t.alloy_percentage, :precision => 3) %></td>
                     <td class="text-center hidden-print">
                       <% if access_level.access_level == 3 -%>
                         <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, t, method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure you want to delete this check?' }  %>
