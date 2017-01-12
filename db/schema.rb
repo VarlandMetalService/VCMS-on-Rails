@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111171008) do
+ActiveRecord::Schema.define(version: 20170112155346) do
 
   create_table "assigned_permissions", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
@@ -137,22 +137,29 @@ ActiveRecord::Schema.define(version: 20170111171008) do
   add_index "shift_notes", ["entered_by"], name: "fk_rails_8c4d173e86", using: :btree
 
   create_table "thickness_blocks", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
+    t.integer  "user_id",          limit: 4
     t.datetime "block_at"
-    t.integer  "shop_order",  limit: 4
-    t.integer  "load",        limit: 4
-    t.integer  "block",       limit: 4
-    t.string   "directory",   limit: 255
-    t.string   "product",     limit: 255
-    t.string   "application", limit: 255
-    t.string   "customer",    limit: 255
-    t.string   "process",     limit: 255
-    t.string   "part",        limit: 255
-    t.string   "sub",         limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "shop_order",       limit: 4
+    t.integer  "load",             limit: 4
+    t.integer  "block",            limit: 4
+    t.string   "directory",        limit: 255
+    t.string   "product",          limit: 255
+    t.string   "application",      limit: 255
+    t.string   "customer",         limit: 255
+    t.string   "process",          limit: 255
+    t.string   "part",             limit: 255
+    t.string   "sub",              limit: 255
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+    t.boolean  "is_deleted",                                            default: false
+    t.integer  "deleted_by",       limit: 4
+    t.decimal  "pounds",                       precision: 6,  scale: 2
+    t.decimal  "piece_weight",                 precision: 10, scale: 6
+    t.decimal  "part_area",                    precision: 10, scale: 6
+    t.decimal  "pounds_per_cubic",             precision: 7,  scale: 2
   end
 
+  add_index "thickness_blocks", ["deleted_by"], name: "fk_rails_a581a45150", using: :btree
   add_index "thickness_blocks", ["user_id"], name: "fk_rails_00ec76c2ce", using: :btree
 
   create_table "thickness_checks", force: :cascade do |t|
@@ -164,10 +171,13 @@ ActiveRecord::Schema.define(version: 20170111171008) do
     t.decimal  "x",                            precision: 8, scale: 5
     t.decimal  "y",                            precision: 8, scale: 5
     t.decimal  "z",                            precision: 8, scale: 5
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
+    t.boolean  "is_deleted",                                           default: false
+    t.integer  "deleted_by",         limit: 4
   end
 
+  add_index "thickness_checks", ["deleted_by"], name: "fk_rails_d4b3bc8e88", using: :btree
   add_index "thickness_checks", ["thickness_block_id"], name: "fk_rails_ce3f53f02f", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -196,5 +206,7 @@ ActiveRecord::Schema.define(version: 20170111171008) do
   add_foreign_key "employee_notes", "users", column: "entered_by"
   add_foreign_key "shift_notes", "users", column: "entered_by"
   add_foreign_key "thickness_blocks", "users"
+  add_foreign_key "thickness_blocks", "users", column: "deleted_by"
   add_foreign_key "thickness_checks", "thickness_blocks"
+  add_foreign_key "thickness_checks", "users", column: "deleted_by"
 end

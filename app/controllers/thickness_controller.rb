@@ -30,6 +30,11 @@ class ThicknessController < ApplicationController
 
     end
 
+    respond_to do |format|
+      format.html
+      format.csv { send_data ThicknessBlock.csv_header + "\n" + @thickness_blocks.map(&:to_csv).join("\n"), filename: "thickness_checks-#{Date.today}.csv" }
+    end
+
   end
 
 private

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :thickness_blocks
+  resources :thickness_blocks do
+    collection do
+      post :reset_weight
+    end
+  end
   resources :thickness_checks
   resources :opto_messages
   root                        'vcms#home'

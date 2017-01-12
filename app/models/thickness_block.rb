@@ -1,5 +1,8 @@
 class ThicknessBlock < ActiveRecord::Base
 
+  # Default scoping.
+  default_scope { where 'is_deleted IS FALSE' }
+
   # Pagination.
   self.per_page = 100
 
@@ -92,6 +95,83 @@ class ThicknessBlock < ActiveRecord::Base
   end
   def self.options_for_shop_order
     ThicknessBlock.uniq.pluck(:shop_order)
+  end
+
+  def block_area
+    if self.pounds.nil? or self.piece_weight.nil? or self.part_area.nil?
+      nil
+    else
+      (self.pounds / self.piece_weight) * self.part_area
+    end
+  end
+
+  def block_volume
+    if self.pounds.nil? or self.pounds_per_cubic.nil?
+      nil
+    else
+      (self.pounds / self.pounds_per_cubic)
+    end
+  end
+
+  def self.csv_header
+    fields = []
+    fields.push 'Date'
+    fields.push 'Time'
+    fields.push 'Employee #'
+    fields.push 'Customer'
+    fields.push 'Process Code'
+    fields.push 'Part ID'
+    fields.push 'Sub ID'
+    fields.push 'S.O. #'
+    fields.push 'Load #'
+    fields.push 'Load Weight'
+    fields.push 'Piece Weight'
+    fields.push 'Area (ft²)'
+    fields.push 'Area (ft³)'
+    fields.push 'Thickness'
+    fields.push 'Alloy %'
+    fields.push 'Directory'
+    fields.push 'Product'
+    fields.push 'Application'
+    return fields.join(',')
+  end
+
+  def to_csv
+    lines = []
+    self.thickness_checks.each do |c|
+      fields = []
+      fields.push c.check_at.strftime '%m/%d/%y'
+      fields.push c.check_at.strftime '%H:%M:%S'
+      fields.push self.user.employee_number
+      fields.push self.customer
+      fields.push self.process
+      fields.push self.part
+      fields.push self.sub
+      fields.push self.shop_order
+      fields.push self.load
+      fields.push self.pounds
+      fields.push self.piece_weight
+      fields.push self.block_area
+      fields.push self.block_volume
+      fields.push c.thickness
+      fields.push c.alloy_percentage
+      fields.push self.directory
+      fields.push self.product
+      fields.push self.application
+      lines.push fields.join(',')
+    end
+    return lines.join("\n")
+  end
+
+  def standard_deviation_thickness
+    return 0 if self.thickness_checks.size == 0
+    return standard_deviation(self.thickness_checks.map(&:thickness))
+  end
+
+  def standard_deviation_alloy_percentage
+    return 0 if self.thickness_checks.size == 0
+    return 0 if self.thickness_checks.maximum(:alloy_percentage) == 0
+    return standard_deviation(self.thickness_checks.map(&:alloy_percentage))
   end
 
 end

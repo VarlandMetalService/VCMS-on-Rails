@@ -5,7 +5,9 @@ class ThicknessChecksController < ApplicationController
 
   def destroy
     if @access_level.access_level == 3
-      if @thickness_check.destroy
+      @thickness_check.is_deleted = true
+      @thickness_check.deleted_by = current_user.id
+      if @thickness_check.save
         redirect_to thickness_index_url, notice: 'Successfully deleted thickness check.'
       else
         redirect_to thickness_index_url, flash: { error: 'Error deleting thickness check. Please contact IT.' }
