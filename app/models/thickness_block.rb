@@ -177,12 +177,19 @@ class ThicknessBlock < ActiveRecord::Base
   end
 
   def pdf_link
-    url = "http://192.168.82.5/so/#{self.shop_order}.pdf"
-    response = RestClient.get url
-    if response.code == 200
-      return url
-    else
-      return nil
+    "http://so.varland.com/so/#{self.shop_order}.pdf"
+  end
+
+  def has_pdf?
+    begin
+      response = RestClient.get self.pdf_link
+      if response.code == 200
+        return true
+      else
+        return false
+      end
+    rescue
+      return false
     end
   end
 
