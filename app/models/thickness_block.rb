@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class ThicknessBlock < ActiveRecord::Base
 
   # Default scoping.
@@ -172,6 +174,16 @@ class ThicknessBlock < ActiveRecord::Base
     return 0 if self.thickness_checks.size == 0
     return 0 if self.thickness_checks.maximum(:alloy_percentage) == 0
     return standard_deviation(self.thickness_checks.map(&:alloy_percentage))
+  end
+
+  def pdf_link
+    url = "http://192.168.82.5/so/#{self.shop_order}.pdf"
+    response = RestClient.get url
+    if response.code == 200
+      return url
+    else
+      return nil
+    end
   end
 
 end

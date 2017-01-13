@@ -22,10 +22,15 @@
           <td class="text-center"><%= b.block_at.strftime '%m/%d/%y %H:%M:%S' %></td>
           <td><%= b.user.full_name %></td>
           <td>
-            <small><strong>S.O. #:</strong></small> <%= b.shop_order %><br />
-            <small><strong>Customer:</strong></small> <%= b.customer %><br />
-            <small><strong>Process:</strong></small> <%= b.process %><br />
-            <small><strong>Part ID:</strong></small> <%= b.part %>
+            <small><strong>S.O. #:</strong></small>
+            <% if b.pdf_link.nil? -%>
+              <%= b.shop_order %>
+            <% else -%>
+              <%= link_to b.shop_order, b.pdf_link %>
+            <% end %>
+            <% unless b.customer.blank? %><br /><small><strong>Customer:</strong></small> <%= b.customer %><% end %>
+            <% unless b.process.blank? %><br /><small><strong>Process:</strong></small> <%= b.process %><% end %>
+            <% unless b.part.blank? %><br /><small><strong>Part ID:</strong></small> <%= b.part %><% end %>
             <% unless b.sub.blank? %><br /><small><strong>Sub ID:</strong></small> <%= b.sub %><% end %>
           </td>
           <td class="text-center">
