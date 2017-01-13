@@ -24,7 +24,7 @@
           <td>
             <small><strong>S.O. #:</strong></small>
             <%= b.shop_order %>
-            <% unless b.has_pdf? -%>
+            <% if b.has_pdf? -%>
               <%= link_to '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>'.html_safe, b.pdf_link, { class: 'text-danger', target: '_blank' } %>
             <% end %>
             <% unless b.customer.blank? %><br /><small><strong>Customer:</strong></small> <%= b.customer %><% end %>
