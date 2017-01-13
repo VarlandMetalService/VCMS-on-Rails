@@ -177,7 +177,7 @@ class ThicknessBlock < ActiveRecord::Base
   end
 
   def pdf_link
-    "http://192.168.82.5/so/#{self.shop_order}.pdf"
+    "http://so.varland.com/so/#{self.shop_order}.pdf"
   end
 
   def has_pdf?
