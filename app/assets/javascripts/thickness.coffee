@@ -2,15 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-advanced = true
+advanced = false
 
 $(document).ready ->
   $('.toggle-advanced-stats').click ->
     if advanced
-      $('.advanced-stats').hide()
-      $('.basic-stats').show()
-      advanced = false
-    else
       $('.advanced-stats').show()
       $('.basic-stats').hide()
+      advanced = false
+    else
+      $('.advanced-stats').hide()
+      $('.basic-stats').show()
       advanced = true
