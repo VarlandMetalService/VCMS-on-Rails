@@ -7,10 +7,10 @@ advanced = false
 $(document).ready ->
   $('.toggle-advanced-stats').click ->
     if advanced
-      $('.advanced-stats').hide()
-      $('.basic-stats').show()
-      advanced = false
-    else
       $('.advanced-stats').show()
       $('.basic-stats').hide()
+      advanced = false
+    else
+      $('.advanced-stats').hide()
+      $('.basic-stats').show()
       advanced = true
