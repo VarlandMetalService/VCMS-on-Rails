@@ -1,7 +1,7 @@
 class OptoMessage < ActiveRecord::Base
 
   # Pagination.
-  self.per_page = 500
+  self.per_page = 100
 
   # Filtering.
   filterrific(

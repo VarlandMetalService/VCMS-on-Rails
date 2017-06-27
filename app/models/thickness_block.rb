@@ -6,7 +6,7 @@ class ThicknessBlock < ActiveRecord::Base
   default_scope { where 'is_deleted IS FALSE' }
 
   # Pagination.
-  self.per_page = 100
+  self.per_page = 25
 
   # Associations.
   belongs_to    :user
