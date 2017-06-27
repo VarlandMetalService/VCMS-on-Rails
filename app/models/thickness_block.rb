@@ -75,28 +75,28 @@ class ThicknessBlock < ActiveRecord::Base
 
   # Select options for customer.
   def self.options_for_customer
-    ThicknessBlock.uniq.pluck(:customer).sort!
+    ThicknessBlock.uniq.pluck(:customer).sort_by(&:downcase)
   end
   def self.options_for_process
-    ThicknessBlock.uniq.pluck(:process).sort!
+    ThicknessBlock.uniq.pluck(:process).sort_by(&:downcase)
   end
   def self.options_for_part
-    ThicknessBlock.uniq.pluck(:part).sort!
+    ThicknessBlock.uniq.pluck(:part).sort_by(&:downcase)
   end
   def self.options_for_sub
-    ThicknessBlock.uniq.pluck(:sub).sort!
+    ThicknessBlock.uniq.pluck(:sub).sort_by(&:downcase)
   end
   def self.options_for_directory
-    ThicknessBlock.uniq.pluck(:directory).sort!
+    ThicknessBlock.uniq.pluck(:directory).sort_by(&:downcase)
   end
   def self.options_for_product
-    ThicknessBlock.uniq.pluck(:product).sort!
+    ThicknessBlock.uniq.pluck(:product).sort_by(&:downcase)
   end
   def self.options_for_application
-    ThicknessBlock.uniq.pluck(:application).sort!
+    ThicknessBlock.uniq.pluck(:application).sort_by(&:downcase)
   end
   def self.options_for_shop_order
-    ThicknessBlock.uniq.pluck(:shop_order).sort!
+    ThicknessBlock.uniq.pluck(:shop_order).sort_by(&:downcase)
   end
 
   def block_area
