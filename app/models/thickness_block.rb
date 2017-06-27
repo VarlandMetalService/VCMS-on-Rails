@@ -96,7 +96,7 @@ class ThicknessBlock < ActiveRecord::Base
     ThicknessBlock.uniq.pluck(:application).sort_by(&:downcase)
   end
   def self.options_for_shop_order
-    ThicknessBlock.uniq.pluck(:shop_order).sort_by(&:downcase)
+    ThicknessBlock.uniq.pluck(:shop_order).sort!
   end
 
   def block_area
