@@ -3,7 +3,7 @@ require 'rest-client'
 class ThicknessBlock < ActiveRecord::Base
 
   # Default scoping.
-  default_scope { where 'is_deleted IS FALSE' }
+  default_scope { where 'is_deleted IS FALSE AND user_id IS NOT NULL' }
 
   # Pagination.
   self.per_page = 25
