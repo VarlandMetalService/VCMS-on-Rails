@@ -28,7 +28,7 @@ class DailyShiftNotesMailer < ApplicationMailer
       else
         return
     end
-    # mail(subject: 'Shift Note Alert', to: recipient)
+    mail(subject: 'New Shift Note')
   end
 
   def daily_summary_email
@@ -36,7 +36,7 @@ class DailyShiftNotesMailer < ApplicationMailer
     @first_shift_notes = ShiftNote.with_date(@yesterday).with_shift(1).sorted_by('created_at')
     @second_shift_notes = ShiftNote.with_date(@yesterday).with_shift(2).sorted_by('created_at')
     @third_shift_notes = ShiftNote.with_date(@yesterday).with_shift(3).sorted_by('created_at')
-    mail(subject: 'Daily Shift Notes Summary')
+    # mail(subject: 'Daily Shift Notes Summary')
   end
 
 end
