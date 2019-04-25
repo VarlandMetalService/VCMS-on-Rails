@@ -28,8 +28,7 @@ class DailyShiftNotesMailer < ApplicationMailer
       else
         return
     end
-    mail(subject: 'Shift Note Alert',
-         to: recipient)
+    # mail(subject: 'Shift Note Alert', to: recipient)
   end
 
   def daily_summary_email
