@@ -11,7 +11,7 @@ class DailyShiftNotesMailer < ApplicationMailer
          to: ["#{@note.author.full_name} <#{@note.author.email}>", "#{@note.supervisor.full_name} <#{@note.supervisor.email}>"])
   end
 
-  def specific_note_email note, group
+  def specific_note_email note
     @note = ShiftNote.find(note)
     mail(subject: 'New Shift Note', to: 'Shift Notes Recipients <dailyshiftnotes@varland.com>')
   end

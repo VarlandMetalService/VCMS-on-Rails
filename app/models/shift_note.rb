@@ -62,20 +62,7 @@ class ShiftNote < ActiveRecord::Base
   # Send email after create.
   after_create :send_specific_note_email
   def send_specific_note_email
-    case self.note_type
-      when 'IT'
-        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'it')
-      when 'Lab'
-        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'lab')
-      when 'Maintenance'
-        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'maintenance')
-      when 'QC'
-        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'qc')
-      when 'Shipping'
-        DailyShiftNotesMailer.delay.specific_note_email(self.id, 'shipping')
-      else
-        return
-    end
+    DailyShiftNotesMailer.delay.specific_note_email(self.id)
   end
 
   # Filtering.
