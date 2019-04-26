@@ -13,22 +13,7 @@ class DailyShiftNotesMailer < ApplicationMailer
 
   def specific_note_email note, group
     @note = ShiftNote.find(note)
-    recipient = nil
-    case group
-      when 'it'
-        recipient = 'IT <it@varland.com>'
-      when 'lab'
-        recipient = 'Lab <lab@varland.com>'
-      when 'maintenance'
-        recipient = 'Maintenance <maint@varland.com>'
-      when 'qc'
-        recipient = 'QC <qcshiftnotes@varland.com>'
-      when 'shipping'
-        recipient = 'Shipping <shippingshiftnotes@varland.com>'
-      else
-        return
-    end
-    mail(subject: 'New Shift Note')
+    mail(subject: 'New Shift Note', to: 'Shift Notes Recipients <dailyshiftnotes@varland.com>')
   end
 
   def daily_summary_email
