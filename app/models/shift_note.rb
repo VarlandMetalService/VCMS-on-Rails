@@ -62,7 +62,7 @@ class ShiftNote < ActiveRecord::Base
   # Send email after create.
   after_create :send_specific_note_email
   def send_specific_note_email
-    DailyShiftNotesMailer.delay.specific_note_email(self.id)
+    DailyShiftNotesMailer.specific_note_email(self).deliver_later
   end
 
   # Filtering.

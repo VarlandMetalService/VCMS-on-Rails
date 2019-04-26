@@ -12,7 +12,7 @@ class DailyShiftNotesMailer < ApplicationMailer
   end
 
   def specific_note_email note
-    @note = ShiftNote.find(note)
+    @note = note
     mail(subject: 'New Shift Note', to: 'Shift Notes Recipients <dailyshiftnotes@varland.com>')
   end
 
