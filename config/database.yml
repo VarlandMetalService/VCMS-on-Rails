@@ -4,7 +4,7 @@ default: &default
   pool: 5
   username: vcms
   password: Vms.1946!
-  host: 192.168.82.2
+  host: mysql.varland.com
 
 development:
   <<: *default
