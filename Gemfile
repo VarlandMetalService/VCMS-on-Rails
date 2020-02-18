@@ -10,7 +10,7 @@ gem 'sqlite3',                      '1.3.11'
 gem 'jbuilder',                     '2.3.2'
 gem 'sdoc',                         '0.4.1', group: :doc
 gem 'rest-client',                  '1.8.0'
-gem 'bootstrap-sass',               '3.2.0.0'
+gem 'bootstrap-sass',               '3.4.1'
 gem 'mysql2',                       '~> 0.3.18'
 gem 'font-awesome-rails',           '4.4.0.0'
 gem 'filterrific',                  '2.0.5'
