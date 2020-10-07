@@ -12,16 +12,16 @@ class EmployeeNotesController < ApplicationController
         params[:filterrific],
         select_options: {
           sorted_by: EmployeeNote.options_for_sorted_by,
-          with_employee: User.options_for_select,
+          with_employee: User.active_options_for_select,
           with_entered_by: EmployeeNote.options_for_entered_by,
           with_note_type: EmployeeNote.options_for_type
         }
       ) or return
 
       if @access_level.access_level == 3
-        @employee_notes = @filterrific.find.page(params[:page])
+        @employee_notes = @filterrific.find.only_active_subjects.page(params[:page])
       else
-        @employee_notes = @filterrific.find.page(params[:page]).with_entered_by(current_user.id)
+        @employee_notes = @filterrific.find.only_active_subjects.page(params[:page]).with_entered_by(current_user.id)
       end
 
     rescue

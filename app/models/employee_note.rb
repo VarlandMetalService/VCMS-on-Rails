@@ -66,6 +66,9 @@ class EmployeeNote < ActiveRecord::Base
   scope :with_date_lte, ->(value) {
     where 'note_on <= ?', value
   }
+  scope :only_active_subjects, -> {
+    where 'employee IN (SELECT DISTINCT id FROM users WHERE is_active IS TRUE)'
+  }
 
   # Select options for type.
   def self.options_for_type
